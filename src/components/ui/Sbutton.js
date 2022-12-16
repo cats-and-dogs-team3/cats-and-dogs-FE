@@ -1,9 +1,10 @@
 import React from "react";
 import styled, { css } from "styled-components";
 
-const Button = (props) => {
+const Sbutton = (props) => {
   return (
     <StButton
+      shadow = {props.shadow}
       border={props.border}
       background={props.background}
       color={props.color}
@@ -19,8 +20,9 @@ const Button = (props) => {
   );
 };
 
-export default Button;
+export default Sbutton;
 const StButton = styled.button`
+  box-shadow:${({ shadow }) => shadow || 'non'};
   border: ${({ border }) => border || css`1px solid var(--color-point1)`};
   border-radius: 1rem;
   padding: 0.5rem 1.25rem;

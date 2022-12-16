@@ -23,7 +23,7 @@ const Container = styled.div`
 
 const StLayout = styled.div`
   margin: 0 auto;
-  width: 110rem;
+  width: 120rem;
   min-width: 80rem;
   flex: 1;
 `;

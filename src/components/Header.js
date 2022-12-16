@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import Button from "./ui/Button";
+import Sbutton from "./ui/Sbutton";
 
 const Header = () => {
   let isUserLogin = false;
@@ -20,7 +20,7 @@ const Header = () => {
           ? "항해99 집사님 환영합니다 😸"
           : "멍멍 ! 로그인을 해주세요 주인님 ! 🐶"}
       </span>
-      <Button mg='0 0 0 2rem'>{isUserLogin ? "로그아웃" : "로그인"}</Button>
+      <Sbutton mg='0 0 0 2rem'>{isUserLogin ? "로그아웃" : "로그인"}</Sbutton>
     </Container>
   );
 };
