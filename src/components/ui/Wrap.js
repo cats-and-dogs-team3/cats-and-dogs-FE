@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const Wrapper = ({ children, pd, mg }) => {
+const Wrap = ({ children, pd, mg }) => {
   return (
     <StContainer pd={pd} mg={mg}>
       {children}
@@ -9,7 +9,7 @@ const Wrapper = ({ children, pd, mg }) => {
   );
 };
 
-export default Wrapper;
+export default Wrap;
 
 const StContainer = styled.div`
   width: 100%;
