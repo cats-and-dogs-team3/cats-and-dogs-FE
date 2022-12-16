@@ -1,18 +1,18 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Main from "../pages/Main";
-import Detail from "../pages/Detail";
-import UploadPost from "../pages/UploadPost";
+import MainPage from "../pages/MainPage";
+import DetailPage from "../pages/DetailPage";
+import UploadPostPage from "../pages/UploadPostPage";
 
 const Router = () => {
   return (
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Main />} />
-          <Route path="/post/:postId" element={<Detail />} />
-          <Route path="/upload" element={<UploadPost />} />
-          <Route path="/update/:postId" element={<UploadPost />} />
+          <Route path="/" element={<MainPage/>} />
+          <Route path="/post/:postId" element={<DetailPage />} />
+          <Route path="/upload" element={<UploadPostPage />} />
+          <Route path="/update/:postId" element={<UploadPostPage />} />
         </Routes>
       </BrowserRouter>
     </>

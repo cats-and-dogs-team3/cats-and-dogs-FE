@@ -1,7 +1,8 @@
 import React from "react";
 import Layout from "../components/Layout";
+import Main from "../components/main/Main";
 
-const Main = () => {
+const MainPage = () => {
   return (
     <div>
       <Layout>
@@ -11,4 +12,4 @@ const Main = () => {
   );
 };
 
-export default Main;
+export default MainPage;

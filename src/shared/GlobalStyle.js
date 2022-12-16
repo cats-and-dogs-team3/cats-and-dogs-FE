@@ -24,7 +24,8 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    /* overflow: hidden; */
+    font-size: 1.6rem;
+    color: var(--color-point4);
     width: 100vw;
     height: 100vh;
   }
