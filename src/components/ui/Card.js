@@ -10,12 +10,14 @@ const Card = ({
   flex,
   gap,
   wrap,
-  shadow,
+  shadow,justify,align
 }) => {
   return (
     <StCard
       wd={wd}
       hg={hg}
+      justify={justify}
+      align={align}
       flex={flex}
       borderColor={borderColor}
       direction={direction}
@@ -44,7 +46,7 @@ export const StCard = styled.div`
 
   /* flex: ${({ flex }) => flex || "0"}; */
   border-radius: 2rem;
-  align-items: center;
-  justify-content: center;
+  align-items: ${({ align }) => align || "center"};
+  justify-content: ${({ justify }) => justify || "center"};
   flex-direction: ${({ direction }) => direction || "row"}; ;
 `;
