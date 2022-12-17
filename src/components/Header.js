@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import Sbutton from "./ui/Sbutton";
 
+
 const Header = () => {
   let isUserLogin = false;
   const navigate = useNavigate();
@@ -43,4 +44,5 @@ const MainTitle = styled.div`
   font-weight: 900;
   flex:1;
   cursor: pointer;
+
 `;
