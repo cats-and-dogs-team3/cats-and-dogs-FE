@@ -1,81 +1,48 @@
 import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import Sbutton from "./ui/Sbutton";
 
-function HeaderLogin(props) {
-  let stateLogin = true;
-  let propsvalue = "userID";
-  if (stateLogin === false) {
-    return (
-      <StyledHeaderLogin>
-        <div className="state_box">빨리 로그인을 해주세욧</div>
-        <div className="button_box">
-          <button>로그인</button>
-        </div>
-      </StyledHeaderLogin>
-    );
-  } else {
-    return (
-      <StyledHeaderLogin>
-        <div className="state_box">{propsvalue}님 환영합니다.</div>
-        <div className="button_box">
-          <button>상태보기</button>
-          <button>로그아웃</button>
-        </div>
-      </StyledHeaderLogin>
-    );
-  }
-}
-function Header() {
+
+const Header = () => {
+  let isUserLogin = false;
   const navigate = useNavigate();
   return (
-    <StyledHeader>
-      <div
-        className="title"
-        onClick={(e) => {
+    <Container>
+      <MainTitle
+        onClick={() => {
           navigate("/");
         }}
       >
-        개냥의 전당
-      </div>
-      <HeaderLogin></HeaderLogin>
-    </StyledHeader>
+        멍냥의 전당 🐾
+      </MainTitle>
+      <span>
+        {isUserLogin
+          ? "항해99 집사님 환영합니다 😸"
+          : "멍멍 ! 로그인을 해주세요 주인님 ! 🐶"}
+      </span>
+      <Sbutton mg='0 0 0 2rem'>{isUserLogin ? "로그아웃" : "로그인"}</Sbutton>
+    </Container>
   );
-}
+};
 
 export default Header;
 
-const StyledHeader = styled.div`
-  width: inherit;
-  height: 80px;
-  display: flex;
-  justify-content: center;
-  background: var(--color-point1);
 
-  .title {
-    width: 70%;
-    height: calc(inherit-15);
-    background: var(--color-point1);
-    font-size: 4.8rem;
-  }
-`;
-const StyledHeaderLogin = styled.div`
-  width: 20%;
-  height: calc(inherit-20);
-  background: var(--color-point1);
+const Container = styled.div`
+  background-color: var(--color-point1);
+  padding: 3rem;
+  width: 100vw;
   display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  padding: 0 20px;
-  gap: 15px;
+  justify-content: space-between;
+  align-items: center;sdf
+  margin: 0;
+`;
+
+const MainTitle = styled.div`
+  color: var(--color-point4);
   font-size: 2.4rem;
-  .button_box {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-  }
-  .button_box button {
-    font-size: 2rem;
-    background: var(--color-point3);
-  }
+  font-weight: 900;
+  flex:1;
+  cursor: pointer;
 `;
