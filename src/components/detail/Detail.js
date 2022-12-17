@@ -6,14 +6,13 @@ import Comments from "./Comments";
 import Post from "./Post";
 const Detail = () => {
   return (
-    
     <Stack mg="7rem 0" direction="column">
-      <Card wd="110rem">
+      <MyCard wd="110rem">
         <StGrid>
           <Post />
           <Comments />
         </StGrid>
-      </Card>
+      </MyCard>
     </Stack>
   );
 };
@@ -24,4 +23,16 @@ const StGrid = styled.div`
   width: 100%;
   display: grid;
   grid-template-columns: 1.7fr 1fr;
+  @media (max-width: 540px) {
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: none;
+  }
+`;
+const MyCard = styled(StCard)`
+  @media (max-width: 540px) {
+    width: auto;
+    border: none;
+    padding: 3rem;
+  }
+
 `;

@@ -1,7 +1,7 @@
 import React from "react";
 import styled, { css } from "styled-components";
 
-const Sbutton = (props) => {
+const MyButton = (props) => {
   return (
     <StButton
       shadow = {props.shadow}
@@ -20,8 +20,9 @@ const Sbutton = (props) => {
   );
 };
 
-export default Sbutton;
+export default MyButton;
 const StButton = styled.button`
+  font-size: 1.6rem;
   box-shadow:${({ shadow }) => shadow || 'non'};
   border: ${({ border }) => border || css`1px solid var(--color-point1)`};
   border-radius: 1rem;

@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import Sbutton from "./ui/Sbutton";
+import MyButton from "./ui/MyButton";
 
 
 const Header = () => {
@@ -21,7 +21,7 @@ const Header = () => {
           ? "항해99 집사님 환영합니다 😸"
           : "멍멍 ! 로그인을 해주세요 주인님 ! 🐶"}
       </span>
-      <Sbutton mg='0 0 0 2rem'>{isUserLogin ? "로그아웃" : "로그인"}</Sbutton>
+      <MyButton mg='0 0 0 2rem'>{isUserLogin ? "로그아웃" : "로그인"}</MyButton>
     </Container>
   );
 };
@@ -32,10 +32,10 @@ export default Header;
 const Container = styled.div`
   background-color: var(--color-point1);
   padding: 3rem;
-  width: 100vw;
+  width: 100%;
   display: flex;
   justify-content: space-between;
-  align-items: center;sdf
+  align-items: center;
   margin: 0;
 `;
 
