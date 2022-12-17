@@ -46,7 +46,7 @@ const Fragment = styled.div`
 const ContentContainer = styled.div`
   padding: 0.7rem 0.1rem 0.7rem 0.7rem;
   width: 100%;
-  border: 0.25rem solid var(--color-point2);
+  border: 0.25rem solid white;
   border-radius: 10px;
   textarea {
     color: var(--color-black);
