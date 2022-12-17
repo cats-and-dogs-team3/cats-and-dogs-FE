@@ -1,7 +1,17 @@
 import react from "react";
 import styled from "styled-components";
 import PostBox from "./PostBox";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { __getPost } from "../../redux/modules/postSlice";
+import { useEffect } from "react";
 function PostList() {
+  const dispatch = useDispatch();
+
+  dispatch(__getPost);
+  useEffect(() => {
+    dispatch(__getPost());
+  }, [dispatch]);
   return (
     <StyledPostList>
       <PostBox></PostBox>
