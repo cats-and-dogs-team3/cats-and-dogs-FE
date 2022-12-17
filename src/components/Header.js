@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
 function HeaderLogin(props) {
-  let stateLogin = false;
+  let stateLogin = true;
   let propsvalue = "userID";
   if (stateLogin === false) {
     return (
@@ -46,31 +46,36 @@ function Header() {
 export default Header;
 
 const StyledHeader = styled.div`
-  width: 100%;
+  width: inherit;
   height: 80px;
   display: flex;
   justify-content: center;
+  background: var(--color-point1);
 
   .title {
     width: 70%;
     height: calc(inherit-15);
     background: var(--color-point1);
-    padding: 10px;
-    font-size: 30px;
+    font-size: 4.8rem;
   }
 `;
 const StyledHeaderLogin = styled.div`
   width: 20%;
-  height: calc(inherit-15);
+  height: calc(inherit-20);
   background: var(--color-point1);
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  padding: 15px;
+  padding: 0 20px;
   gap: 15px;
-
+  font-size: 2.4rem;
   .button_box {
     display: flex;
     flex-direction: column;
+    gap: 5px;
+  }
+  .button_box button {
+    font-size: 2rem;
+    background: var(--color-point3);
   }
 `;
