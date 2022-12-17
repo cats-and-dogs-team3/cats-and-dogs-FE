@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import Sbutton from "./ui/Sbutton";
 
+
 const Header = () => {
   let isUserLogin = false;
   const navigate = useNavigate();
@@ -27,13 +28,14 @@ const Header = () => {
 
 export default Header;
 
+
 const Container = styled.div`
   background-color: var(--color-point1);
   padding: 3rem;
   width: 100vw;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: center;sdf
   margin: 0;
 `;
 
