@@ -11,7 +11,8 @@ export const __getPost = createAsyncThunk(
       console.log("date get post", data);
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
-      return thunkAPI.rejectWithValue(error);
+      console.log(error.message);
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 ); 
