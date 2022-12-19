@@ -5,11 +5,9 @@ import Detail from "../components/detail/Detail";
 
 const DetailPage = () => {
   return (
-    <div>
       <Layout wd={'110rem'}>
         <Detail />
       </Layout>
-    </div>
   );
 };
 

@@ -4,7 +4,7 @@ import post from "../modules/postSlice";
 
 const store = configureStore({
   reducer: {
-    post: post,
+    post,
   },
 });
 

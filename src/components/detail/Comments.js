@@ -3,23 +3,20 @@ import styled from "styled-components";
 import Stack from "../ui/Stack";
 import Comment from "./Comment";
 import CommentForm from "./CommentForm";
+import { useSelector } from "react-redux";
 const Comments = () => {
-  const commentArr = [
-    { userName: "test", comment: "comment" },
-    { userName: "test", comment: "comment" },
-    { userName: "test", comment: "comment" },
-    { userName: "test", comment: "comment" },
-    { userName: "test", comment: "comment" },
-    { userName: "test", comment: "comment" },
-    { userName: "test", comment: "comment" },
-    { userName: "test", comment: "comment" },
-  ];
+  const comments = useSelector((state) => state.post.comments);
   return (
     //comments section
-    <Stack gap={'2rem'} justify={"flex-start"} pd={"2rem 0"} direction={"column"}>
+    <Stack
+      gap={"2rem"}
+      justify={"flex-start"}
+      pd={"2rem 0"}
+      direction={"column"}
+    >
       {/* comments container*/}
       <StContainer gap="1rem" justify="flex-start" direction={"column"}>
-        {commentArr.map((comment) => (
+        {comments.map((comment) => (
           <Comment comment={comment} />
         ))}
       </StContainer>
@@ -36,6 +33,7 @@ const StContainer = styled.div`
   justify-content: flex-start;
   gap: 1rem;
   max-height: 50rem;
+  padding: 2rem;
   overflow-y: scroll;
+  flex: 1;
 `;
-

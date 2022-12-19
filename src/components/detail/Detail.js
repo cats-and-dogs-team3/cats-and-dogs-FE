@@ -24,13 +24,14 @@ const StGrid = styled.div`
   display: grid;
   grid-template-columns: 1.7fr 1fr;
   @media (max-width: 540px) {
+    width: 100vw;
     grid-template-rows: 1fr 1fr;
     grid-template-columns: none;
   }
 `;
 const MyCard = styled(StCard)`
   @media (max-width: 540px) {
-    width: auto;
+    width: 100vw;
     border: none;
     padding: 3rem;
   }
