@@ -2,13 +2,14 @@ import styled, {css} from 'styled-components'
 
 //todo: 각각 컴포넌트들로 만들어줄것
 export const Img = styled.img`
-  width: ${({wd}) => wd || '320px'};
-  height: ${({hg}) => hg || '50px'};
+  width: ${({wd}) => wd || '40rem'};
+  height: ${({hg}) => hg || '40rem'};
+  border-radius: 10%;
 `
 export const Card = styled.div`
   flex-wrap: wrap;
   display: flex;
-  border: 1px solid ${({borderColor}) => borderColor || css`var(--color-gray)`};
+  border: 1px solid ${({borderColor}) => borderColor || css`var(--color-point2)`};
   width: ${({wd}) => wd || '32rem'};
   height: ${({hg}) => hg || '5rem'};
   border-radius: 3rem;
