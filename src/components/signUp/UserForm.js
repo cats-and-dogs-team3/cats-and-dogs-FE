@@ -1,6 +1,20 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { supportDeviceSize } from "../layout/styled";
+import { supportDeviceSize } from "../../shared/GlobalStyle";
+
+import { useNavigate } from "react-router-dom";
+// import { forIsDuplicated } from "../../utils/utility";
+import { Wrap, Button, Card, Stack, Img } from '../ui/index';
+import { useDispatch, useSelector } from "react-redux";
+import { serverErrors } from "../../dataManager/apiConfig";
+import {
+  __inputName,
+  __inputPhone,
+  __inputPwd,
+  __inputUserId,
+  __showPwd,
+  __submitForm,
+} from "../../redux/actions/signup";
 import {
   chatLogo,
   check,
@@ -10,20 +24,7 @@ import {
   postLogo,
   settingLogo,
   xMark,
-} from "../../assets";
-import { useNavigate } from "react-router-dom";
-import { forIsDuplicated } from "../../utils/utility";
-import { Wrap, Button, Card, Stack, Img } from "../ui";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  __inputName,
-  __inputPhone,
-  __inputPwd,
-  __inputUserId,
-  __showPwd,
-  __submitForm,
-} from "../../store/actions/signup";
-import { serverErrors } from "../../dataManager/apiConfig";
+} from "../../asset/signUp";
 
 //하단 메세지
 const messages = {
@@ -44,16 +45,16 @@ const UserForm = () => {
   const [formIsValid, setFormIsValid] = useState(false);
   const [isDuplicated, setIsDuplicated] = useState(false);
 
-  //아이디 중복 체크
-  useEffect(() => {
-    forIsDuplicated(userIdState.value)
-      .then((data) => {
-        setIsDuplicated(data.code === 2230);
-        if (serverErrors.includes(data.code))
-          throw new Error("서버 에러 : 관리자에게 문의해주세요 !");
-      })
-      .catch((err) => alert(err));
-  }, [userIdState.value]);
+  // //아이디 중복 체크
+  // useEffect(() => {
+  //   forIsDuplicated(userIdState.value)
+  //     .then((data) => {
+  //       setIsDuplicated(data.code === 2230);
+  //       if (serverErrors.includes(data.code))
+  //         throw new Error("서버 에러 : 관리자에게 문의해주세요 !");
+  //     })
+  //     .catch((err) => alert(err));
+  // }, [userIdState.value]);
 
   //form 유효성 체크
   useEffect(() => {
