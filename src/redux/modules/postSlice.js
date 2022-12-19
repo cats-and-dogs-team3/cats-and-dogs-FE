@@ -1,15 +1,16 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
-import serverUrl from '../server.js.js'
+import instance from "../server.js";
 
 export const __getPost = createAsyncThunk(
   "getPost",
   async (payload, thunkAPI) => {
     try {
-      const { data } = await axios.get(`${serverUrl}/post`);
+      const { data } = await instance.get(`/postList`);
+      console.log(data);
       return thunkAPI.fulfillWithValue(data);
     } catch (error) {
-      return thunkAPI.rejectWithValue(error);
+      console.log(error.message);
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
