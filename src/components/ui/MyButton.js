@@ -2,17 +2,23 @@ import React from "react";
 import styled, { css } from "styled-components";
 
 const MyButton = (props) => {
+  const onClickHandler = (e) => {
+    console.log(e,'e')
+    props.onClick(e);
+  };
+
   return (
     <StButton
-      shadow = {props.shadow}
+      shadow={props.shadow}
       border={props.border}
       background={props.background}
       color={props.color}
+      name={props.name}
       hoverBacground={props.hoverBacground}
       hoverBorderColor={props.hoverBorderColor}
       hoverColor={props.hoverColor}
       type={props.type || "button"}
-      onClick={props.onClick}
+      onClick={onClickHandler}
       mg={props.mg}
     >
       {props.children}
@@ -23,7 +29,7 @@ const MyButton = (props) => {
 export default MyButton;
 const StButton = styled.button`
   font-size: 1.6rem;
-  box-shadow:${({ shadow }) => shadow || 'non'};
+  box-shadow: ${({ shadow }) => shadow || "non"};
   border: ${({ border }) => border || css`1px solid var(--color-point1)`};
   border-radius: 1rem;
   padding: 0.5rem 1.25rem;

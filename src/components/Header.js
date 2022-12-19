@@ -32,7 +32,7 @@ export default Header;
 const Container = styled.div`
   background-color: var(--color-point1);
   padding: 3rem;
-  width: 100%;
+  width: 100vw;
   display: flex;
   justify-content: space-between;
   align-items: center;

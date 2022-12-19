@@ -26,4 +26,7 @@ const StLayout = styled.div`
   width: ${({ wd }) => wd || "140rem"}; // 수정 원값 110rems
   min-width: 80rem;
   flex: 1;
+  @media (max-width: 540px) {
+    width: 100vw;
+  }
 `;

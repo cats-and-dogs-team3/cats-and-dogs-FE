@@ -13,7 +13,7 @@ const CommentForm = () => {
         borderColor={"var(--color-point3)"}
         pd={"1rem 2rem"}
         gap={"1rem"}
-        wd="30rem"
+        wd="31rem"
         direction={"column"}
       >
         <Stack align={"flex-start"} direction={"column"}>

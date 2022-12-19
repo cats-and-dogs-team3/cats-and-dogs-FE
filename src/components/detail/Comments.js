@@ -16,7 +16,12 @@ const Comments = () => {
   ];
   return (
     //comments section
-    <Stack gap={'2rem'} justify={"flex-start"} pd={"2rem 0"} direction={"column"}>
+    <Stack
+      gap={"2rem"}
+      justify={"flex-start"}
+      pd={"2rem 0"}
+      direction={"column"}
+    >
       {/* comments container*/}
       <StContainer gap="1rem" justify="flex-start" direction={"column"}>
         {commentArr.map((comment) => (
@@ -36,6 +41,6 @@ const StContainer = styled.div`
   justify-content: flex-start;
   gap: 1rem;
   max-height: 50rem;
+  padding: 2rem;
   overflow-y: scroll;
 `;
-
