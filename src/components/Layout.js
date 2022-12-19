@@ -24,7 +24,7 @@ const Container = styled.div`
 const StLayout = styled.div`
   margin: 0 auto;
 
-  width: 140rem; // 수정 원값 110rems
+  width: 120rem; // 수정 원값 110rems
 
   min-width: 80rem;
   flex: 1;
