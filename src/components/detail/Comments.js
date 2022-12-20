@@ -16,12 +16,11 @@ const Comments = () => {
     >
       {/* comments container*/}
       <StContainer gap="1rem" justify="flex-start" direction={"column"}>
-        {comments.map((comment) => (
+        {comments.commentList.map((comment) => (
           <Comment comment={comment} />
         ))}
       </StContainer>
-      {/* commentForm */}
-      <CommentForm />
+      <CommentForm postId={comments.postId} />
     </Stack>
   );
 };

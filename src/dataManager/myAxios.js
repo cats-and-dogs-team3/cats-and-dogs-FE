@@ -6,6 +6,7 @@ myAxios.interceptors.request.use((config) => {
   console.log(config);
   if (config === undefined) return;
   const token = localStorage.getItem("jwt");
+  config.headers['Access-Control-Allow-Origin'] = '*'
   config.headers["Authorization"] = token;
   return config;
 });

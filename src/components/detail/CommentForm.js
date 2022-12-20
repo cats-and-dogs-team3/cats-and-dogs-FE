@@ -4,7 +4,8 @@ import Stack from "../ui/Stack";
 import MyButton from "../ui/MyButton";
 import styled from "styled-components";
 
-const CommentForm = () => {
+const CommentForm = ({postId}) => {
+  console.log('commentform',postId)
   const user = { userName: "mcho" };
   return (
     <Div>

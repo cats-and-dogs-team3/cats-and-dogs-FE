@@ -1,91 +1,70 @@
-// import {isValidId, isValidName, isValidPhoneNumber, isValidPwd} from '../../utils/utility'
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { act } from "react-dom/test-utils";
+import {
+  isValidEmail,
+  isValidId,
+  isValidPassword,
+} from "../../components/signUp/func/functionsForSignUp";
 
 //초기 상태값 설정
 const initialState = {
-  phone: {value: '', isValid: false},
-  name: {value: '', isValid: false},
-  userId: {value: '', isValid: false},
-  pwd: {value: '', isValid: false, isShown: false},
-  form: {phoneNumber: '', realName: '', loginId: '', password: '', birthDate: '', accessToken: ''},
-  loginForm: {loginId: '', password: ''},
-}
+  username: { value: "", isValid: false },
+  email: { value: "", isValid: false },
+  password: { value: "", isValid: false, isShown: false },
+  passwordCheck: { value: "", isValid: false, isShown: false },
+  nickname: { value: "", isValid: false },
+  form: { username: "", email: "", nickname: "", password: "" },
+  loginForm: { username: "", password: "" },
+};
+const signUpSlice = createSlice({
+  name: "signUp",
+  initialState,
+  reducers: {
+    __cleanUp: (state, action) => {
+      state = initialState;
+    },
+    __submitForm: (state, action) => {
+      state.form = action.payload;
+    },
+    __typeUsername: (state, action) => {
+      state.username.value = action.payload;
+      state.username.isValid = isValidId(action.payload);
+    },
+    __typeEmail: (state, action) => {
+      state.email.value = action.payload;
+      state.email.isValid = isValidEmail(action.payload);
+    },
+    __typePassword: (state, action) => {
+      state.password.value = action.payload;
+      state.password.isValid = isValidPassword(action.payload);
+    },
+    __typePasswordCheck: (state, action) => {
+      state.passwordCheck.value = action.payload;
+      state.passwordCheck.isValid = action.payload === state.password.value
+    },
+    __typeNickname: (state, action) => {
+      state.nickname.value = action.payload;
+      state.nickname.isValid = action.payload.trim() !== "";
+    },
+    __showPwd: (state, action) => {
+      state.password.isShown = !state.password.isShown;
+    },
+    __showPwdCheck: (state, action) => {
+      state.passwordCheck.isShown = !state.passwordCheck.isShown;
+    },
+  },
+});
 
-//리듀서 설정
-const signUp = (state = initialState, action) => {
-  switch (action.type) {
-    case 'CLEAN_UP': {
-      return initialState
-    }
-    case 'SUBMIT_FORM': {
-      return {
-        ...state,
-        form: {
-          ...state.form,
-          ...action.payload,
-        },
-      }
-    }
-    case 'SUBMIT_KAKAO_TOKEN': {
-      return {
-        ...state,
-        form: {
-          ...state.form,
-          accessToken: action.payload,
-        },
-      }
-    }
-    case 'INPUT_PHONE': {
-      return {
-        ...state,
-        phone: {
-          value: action.payload,
-          // isValid: isValidPhoneNumber(action.payload),
-        },
-      }
-    }
-    case 'INPUT_NAME': {
-      return {
-        ...state,
-        name: {
-          value: action.payload,
-          // isValid: isValidName(action.payload),
-        },
-      }
-    }
-    case 'INPUT_USERID': {
-      return {
-        ...state,
-        userId: {
-          value: action.payload,
-          // isValid: isValidId(action.payload),
-        },
-      }
-    }
-    case 'INPUT_PWD': {
-      return {
-        ...state,
-        pwd: {
-          ...state.pwd,
-          value: action.payload,
-          // isValid: isValidPwd(action.payload),
-        },
-      }
-    }
-    case 'SHOW_PWD': {
-      return {
-        ...state,
-        pwd: {
-          ...state.pwd,
-          isShown: !state.pwd.isShown,
-        },
-      }
-    }
-    default: {
-      return {
-        ...state,
-      }
-    }
-  }
-}
+export const {
+  __cleanUp,
+  __showPwd,
+  __showPwdCheck,
+  __submitForm,
+  __typeUsername,
+  __typeEmail,
+  __typeNickname,
+  __typePassword,
+  __typePasswordCheck,
+} = signUpSlice.actions;
 
-export default signUp
+export default signUpSlice.reducer;

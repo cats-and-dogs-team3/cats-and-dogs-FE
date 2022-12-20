@@ -8,6 +8,7 @@ const GlobalStyle = createGlobalStyle`
   :root{
     --color-point1: #FBE0C3;
     --color-point2: #FFBB98;
+    --color-point2-filter: invert(94%) sepia(31%) saturate(3724%) hue-rotate(297deg) brightness(103%) contrast(100%);
     --color-point3: #7D8E95;
     --color-point4: #344648;
 
