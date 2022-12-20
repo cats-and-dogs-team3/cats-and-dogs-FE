@@ -1,16 +1,18 @@
 import React from "react";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
-import Card, { StCard } from "../ui/Card";
+import { StCard } from "../ui/Card";
 import Stack from "../ui/Stack";
 import Comments from "./Comments";
 import Post from "./Post";
 const Detail = () => {
+  const {postId} = useParams()
   return (
     <Stack mg="7rem 0" direction="column">
       <MyCard wd="110rem">
         <StGrid>
-          <Post />
-          <Comments />
+          <Post postId = {postId}/>
+          <Comments postId = {postId}/>
         </StGrid>
       </MyCard>
     </Stack>

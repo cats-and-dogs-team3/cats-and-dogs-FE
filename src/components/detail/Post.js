@@ -1,27 +1,28 @@
 import React from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { likeEmpty, likeFilled, threeCats } from "../../asset";
+import moment from "moment";
+
+import { Like } from "../ui/Like";
 import { Img } from "../ui/Img";
 import MyButton from "../ui/MyButton";
 import Stack, { StStack } from "../ui/Stack";
-import { useEffect } from "react";
-import { __getPost } from "../../redux/modules/postSlice";
-import moment from "moment";
-import {Like} from "../ui/Like";
+import { likeEmpty, likeFilled, threeCats } from "../../asset";
 
-const Post = () => {
+import { __getPost, __liking } from "../../redux/modules/postSlice";
+
+const Post = ({ postId }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { postId } = useParams();
   const post = useSelector((state) => state.post.post);
   const onClickLikeHandler = () => {
-    dispatch(post.postLike);
+    dispatch(__liking(postId));
   };
   useEffect(() => {
     dispatch(__getPost(postId));
-  }, []);
+  }, [dispatch,postId]);
   const onClickHandler = (e) => {
     const { name } = e.target;
     if (name === "edit") navigate("/");
@@ -42,8 +43,14 @@ const Post = () => {
           <Stack justify={"space-between"} gap={"3rem"}>
             <Stack gap={"1.2rem"} wd={"none"}>
               <h3>{post.nickname}</h3>
-              <Like style={{marginLeft:'1rem'}} src={post.postLike ? likeFilled : likeEmpty} />
-              <span style={{fontSize:'2.5rem'}}>{post.likeCount}</span>
+              <Like
+                onClick={onClickLikeHandler}
+                style={{ marginLeft: "1rem" }}
+                src={post.postLike ? likeFilled : likeEmpty}
+              />
+              <span style={{ fontSize: "2rem" }}>
+                {post.likeCount !==0 && `${post.likeCount} 명이 좋아합니다.`} 
+              </span>
             </Stack>
             <span>
               {post.modifiedAt !== ""

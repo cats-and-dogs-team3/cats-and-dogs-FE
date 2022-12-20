@@ -3,7 +3,6 @@ import styled, { css } from "styled-components";
 
 const MyButton = (props) => {
   const onClickHandler = (e) => {
-    console.log(e,'e')
     props.onClick(e);
   };
 

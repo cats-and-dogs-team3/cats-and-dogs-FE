@@ -1,12 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import Card from "../ui/Card";
 import Stack from "../ui/Stack";
 import MyButton from "../ui/MyButton";
 import styled from "styled-components";
+import { useDispatch, useSelector } from "react-redux";
+import { __addComment, __typeComment } from "../../redux/modules/postSlice";
 
-const CommentForm = ({postId}) => {
-  console.log('commentform',postId)
+const CommentForm = ({ postId }) => {
+  const commentState = useSelector((state) => state.post.comment);
+  console.log("commentform", commentState);
+  const dispatch = useDispatch();
   const user = { userName: "mcho" };
+  const onChangeHandler = (e) => {
+    dispatch(__typeComment(e.target.value));
+  };
+  const onSubmitHandler = () => {
+    dispatch(__addComment({ postId: postId, comment: {content:commentState} }));
+  };
   return (
     <Div>
       <Card
@@ -20,11 +30,20 @@ const CommentForm = ({postId}) => {
         <Stack align={"flex-start"} direction={"column"}>
           <span className="userName">{user.userName}</span>
           <StContainer>
-            <textarea rows={3} placeholder={"댓글 입력"} />
+            <textarea
+              rows={3}
+              placeholder={"댓글 입력"}
+              value={commentState}
+              onChange={onChangeHandler}
+            />
           </StContainer>
         </Stack>
         <Stack direction={"row"} justify="flex-end">
-          <MyButton border="none" shadow={"0 2px 4px rgba(0, 0, 0, 0.3)"}>
+          <MyButton
+            onClick={onSubmitHandler}
+            border="none"
+            shadow={"0 2px 4px rgba(0, 0, 0, 0.3)"}
+          >
             작성
           </MyButton>
         </Stack>
