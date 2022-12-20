@@ -19,7 +19,7 @@ import {
 import { closedEye, openEye } from "../../asset/signUp/index";
 import { connectKakao } from "./func/functionsForLogin";
 import SignUpFooter from "../signUp/SignUpFooter";
-import { $submitForm } from "../../dataManager/myQueries";
+import { $login } from "../../dataManager/myQueries";
 
 //하단 메세지
 const messages = {
@@ -63,10 +63,15 @@ const SignInForm = () => {
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    $submitForm({
+    $login({
       username: usernameState.value,
       password: passwordState.value,
-    }).then((data) => console.log(data));
+    }).then((data) => {
+      console.log(data)
+      localStorage.setItem('jwt',data.data)
+      navigate('/')
+      // data.statusCode===200 ? navigate('/') : alert(data.msg)
+    });
   };
   const onClickKakaoLogin = () => {
     connectKakao();

@@ -5,7 +5,6 @@ import {useNavigate} from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 const SignUpFooter = ({isLogin}) => {
-  console.log('signup footer')
   const navigate = useNavigate()
 
   return (
@@ -15,7 +14,7 @@ const SignUpFooter = ({isLogin}) => {
           계정이 있으신가요?{' '}
           <span
             style={{color: 'var(--color-primary)', cursor: 'pointer'}}
-            onClick={() => navigate(isLogin ? '/sign-up' : '/login')}
+            onClick={() => navigate(isLogin ? '/sign-up' : '/sign-in')}
           >
             {isLogin ? '가입하기' : '로그인'}
           </span>

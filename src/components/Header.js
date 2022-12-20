@@ -2,10 +2,10 @@ import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import MyButton from "./ui/MyButton";
+import { $getToken } from "../dataManager/myQueries";
 
 
 const Header = () => {
-  let isUserLogin = false;
   const navigate = useNavigate();
   return (
     <Container>
@@ -17,11 +17,11 @@ const Header = () => {
         멍냥의 전당 🐾
       </MainTitle>
       <span>
-        {isUserLogin
+        {$getToken()
           ? "항해99 집사님 환영합니다 😸"
           : "멍멍 ! 로그인을 해주세요 주인님 ! 🐶"}
       </span>
-      <MyButton mg='0 0 0 2rem'>{isUserLogin ? "로그아웃" : "로그인"}</MyButton>
+      <MyButton onClick={()=>navigate('/sign-in')} mg='0 0 0 2rem'>{$getToken() ? "로그아웃" : "로그인"}</MyButton>
     </Container>
   );
 };

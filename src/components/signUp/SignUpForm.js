@@ -30,6 +30,7 @@ import {
   xMark,
 } from "../../asset/signUp";
 import SignUpFooter from "./SignUpFooter";
+import { $signUp } from "../../dataManager/myQueries";
 
 //하단 메세지
 
@@ -47,10 +48,10 @@ const UserForm = () => {
   const [formIsValid, setFormIsValid] = useState(false);
   const [inputReadOnlyState, setInputReadOnly] = useState({
     usernameInput: false,
+    nicknameInput: true,
     emailInput: true,
     passwordInput: true,
     passwordCheckInput: true,
-    nicknameInput: true,
   });
 
   //유효성 체크
@@ -61,15 +62,16 @@ const UserForm = () => {
           nicknameState.isValid &&
           usernameState.isValid &&
           passwordState.isValid &&
-          passwordCheckState.isValid
+          passwordCheckState.isValid &&
+          isPasswordUnMatched === false
       );
       setInputReadOnly((prev) => {
         return {
           ...prev,
-          emailInput: !usernameState.isValid,
+          nicknameInput: !usernameState.isValid,
+          emailInput: !nicknameState.isValid,
           passwordInput: !emailState.isValid,
           passwordCheckInput: !passwordState.isValid,
-          nicknameInput: !passwordCheckState.isValid,
         };
       });
       setIsPasswordUnMatched(
@@ -88,6 +90,7 @@ const UserForm = () => {
     passwordCheckState.isValid,
     passwordState.value,
     passwordCheckState.value,
+    isPasswordUnMatched,
   ]);
 
   const onChangeHandler = (e) => {
@@ -116,15 +119,23 @@ const UserForm = () => {
   //회원가입 버튼
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    dispatch(
-      __submitForm({
-        username: usernameState.value,
-        email: emailState.value,
-        password: passwordState.value,
-        nickname: nicknameState.value,
+    const form = {
+      username: usernameState.value,
+      email: emailState.value,
+      password: passwordState.value,
+      nickname: nicknameState.value,
+    };
+    console.log(form, "form");
+    $signUp({
+      username: usernameState.value,
+      email: emailState.value,
+      password: passwordState.value,
+      nickname: nicknameState.value,
+    })
+      .then((data) => {
+        data.statusCode === 200 ? navigate("/sign-in") : alert(data.msg);
       })
-    );
-    navigate("/sign-in");
+      .catch((err) => console.log("err", err.response.data));
   };
   //jsx
   const messages = {
@@ -155,6 +166,22 @@ const UserForm = () => {
                   <Img
                     className="rightLogo"
                     src={usernameState.isValid ? check : xMark}
+                  />
+                )}
+              </Card>
+              <Card>
+                <Img className="leftLogo" src={humanLogo} />
+                <StInput
+                  readOnly={inputReadOnlyState.nicknameInput}
+                  value={nicknameState.value}
+                  name="nickname"
+                  onChange={onChangeHandler}
+                  placeholder="닉네임을 입력해주세요"
+                ></StInput>
+                {nicknameState.value.length === 0 ? null : (
+                  <Img
+                    className="rightLogo"
+                    src={nicknameState.isValid ? check : xMark}
                   />
                 )}
               </Card>
@@ -303,7 +330,7 @@ const Fragment = styled.div`
     color: var(--color-black);
   }
 `;
-const StInput = styled.input.attrs({ maxLength: "20" })`
+const StInput = styled.input.attrs({ maxLength: "25" })`
   font-weight: 500;
   :focus {
     outline: none;
@@ -312,7 +339,7 @@ const StInput = styled.input.attrs({ maxLength: "20" })`
   flex-grow: 1;
   margin-right: 0.2rem;
 `;
-const StPwdInput = styled(StInput).attrs({ maxLength: "20" })`
+const StPwdInput = styled(StInput).attrs({ maxLength: "15" })`
   width: 5rem;
   flex-grow: 1;
 `;
