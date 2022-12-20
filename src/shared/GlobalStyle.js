@@ -8,6 +8,7 @@ const GlobalStyle = createGlobalStyle`
   :root{
     --color-point1: #FBE0C3;
     --color-point2: #FFBB98;
+    --color-point2-filter: invert(94%) sepia(31%) saturate(3724%) hue-rotate(297deg) brightness(103%) contrast(100%);
     --color-point3: #7D8E95;
     --color-point4: #344648;
 
@@ -33,12 +34,12 @@ const GlobalStyle = createGlobalStyle`
     font-size: 62.5%; // 1rem = 10px 로 변경 한 것, 바꾼 이유는 사파리에서 폰트가 너무 작은것은 허용하지 않기 때문.
     // 참고링크 = https://stackoverflow.com/questions/68790660/setting-root-font-size-not-affecting-rem-units-in-safari-for-margin-padding-et
     // 128px => 12.8rem , 4px => 0.4rem 가능!
-    @media all and (max-width: ${supportDeviceSize_}px) {
+    /* @media all and (max-width: ${supportDeviceSize_}px) {
             font-size: 42%;
-        }
-        @media all and (max-width: ${supportDeviceSize}px) {
+        } */
+        /* @media all and (max-width: ${supportDeviceSize}px) {
             font-size: 30.25%;
-        }
+        } */
  
   }
   

@@ -3,10 +3,10 @@ import styled from "styled-components";
 import Footer from "./Footer";
 import Header from "./Header";
 
-const Layout = ({ children, wd }) => {
+const Layout = ({ children, wd, isSignUp }) => {
   return (
     <Container>
-      <Header />
+      {isSignUp||<Header />}
       <StLayout wd={wd}>{children}</StLayout>
       <Footer />
     </Container>

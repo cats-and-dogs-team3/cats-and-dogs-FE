@@ -1,11 +1,11 @@
 import React from "react";
 import Layout from "../components/Layout";
-import UserForm from "../components/signUp/UserForm";
+import SignUpForm from "../components/signUp/SignUpForm";
 
 const SignUpPage = () => {
   return (
-    <Layout wd={"1200"}>
-      <UserForm />
+    <Layout wd={"1200"} isSignUp={true}>
+      <SignUpForm />
     </Layout>
   );
 };

@@ -25,7 +25,7 @@ export const Wrap = styled.div`
   margin: ${({mg}) => mg || '0'};
   width: 45rem;
   padding: ${({pd}) => pd || '3rem'};
-  border: 0.1px solid ${({borderColor}) => borderColor || css`var(--color-gray)`};
+  border: 0.1px solid ${({borderColor}) => borderColor || css`var(--color-point4)`};
 `
 export const Stack = styled.div`
   display: flex;

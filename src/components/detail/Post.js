@@ -2,28 +2,26 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
-import { threeCats } from "../../asset";
+import { likeEmpty, likeFilled, threeCats } from "../../asset";
 import { Img } from "../ui/Img";
 import MyButton from "../ui/MyButton";
 import Stack, { StStack } from "../ui/Stack";
-
 import { useEffect } from "react";
 import { __getPost } from "../../redux/modules/postSlice";
 import moment from "moment";
+import {Like} from "../ui/Like";
 
 const Post = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { postId } = useParams();
-  useEffect(() => {
-    dispatch(__getPost(postId));
-  }, []);
   const post = useSelector((state) => state.post.post);
-  console.log("post", post);
   const onClickLikeHandler = () => {
     dispatch(post.postLike);
   };
-
+  useEffect(() => {
+    dispatch(__getPost(postId));
+  }, []);
   const onClickHandler = (e) => {
     const { name } = e.target;
     if (name === "edit") navigate("/");
@@ -41,23 +39,22 @@ const Post = () => {
           align={"flex-start"}
           direction={"column"}
         >
-          <Stack justify={"space-between"} pd={"0.5rem"} gap={"3rem"}>
-            <Stack gap={"3rem"} wd={"none"}>
+          <Stack justify={"space-between"} gap={"3rem"}>
+            <Stack gap={"1.2rem"} wd={"none"}>
               <h3>{post.nickname}</h3>
-
-              <span>{post.likeCount}</span>
-              {/* className = post.postLike ? liked : unLiked */}
-              {/* onClick={onClickLikeHandler} */}
-              <span>❤️</span>
+              <Like style={{marginLeft:'1rem'}} src={post.postLike ? likeFilled : likeEmpty} />
+              <span style={{fontSize:'2.5rem'}}>{post.likeCount}</span>
             </Stack>
             <span>
               {post.modifiedAt !== ""
-                ? `${post.modifiedAt} (수정됨)`
-                : post.createdAt}
+                ? `${moment(post.modifiedAt).format(
+                    "YYYY-MM-DD hh:mm:ss"
+                  )} (수정됨)`
+                : moment(post.createdAt).format("YYYY-MM-DD hh:mm:ss")}
             </span>
           </Stack>
           <ContentContainer>
-            <textarea value={post.content}></textarea>
+            <textarea value={post.content} readOnly></textarea>
           </ContentContainer>
           <Stack pd="0 2rem 2rem 0" justify={"flex-end"}>
             <MyButton name="edit" onClick={onClickHandler}>
@@ -92,7 +89,7 @@ const ContentContainer = styled.div`
   /* border: 0.25rem solid white; */
   border-radius: 10px;
   textarea {
-    color: var(--color-black);
+    color: var(--color-point3);
     width: 100%;
     border: none;
     font-size: 1.5rem;
