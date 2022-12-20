@@ -7,8 +7,14 @@ import { $getToken, $logout, $removeToken } from "../dataManager/myQueries";
 const Header = () => {
   const navigate = useNavigate();
   const onClickHandler = (e) => {
-    const {name} = e.target
-    name==='로그아웃' ? $removeToken() && navigate('/') : navigate('/sign-in')
+    const { name } = e.target;
+    console.log('name',name)
+    if (name === "로그아웃") {
+      $removeToken();
+      navigate("/");
+    } else {
+      navigate("/sign-in");
+    }
   };
   return (
     <Container>

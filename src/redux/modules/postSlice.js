@@ -43,14 +43,24 @@ export const __addComment = createAsyncThunk(
     }
   }
 );
-// const initialState = {
-//   post: {},
-//   comments: [],
-//   comment:'',
-//   isLoading: false,
-//   error: null,
-// };
+export const __deleteComment = createAsyncThunk(
+  "__deleteComment",
+  async (payload, thunkAPI) => {
+    try {
+      const res = await myAxios.delete(
+        `/post/${payload.postId}/comment/${payload.commentId}`
+      );
+      console.log("addComment res", res);
+      return thunkAPI.fulfillWithValue(payload);
+    } catch (error) {
+      console.log("addComment error", error.message);
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
 const initialState = {
+  userNickname: "",
   post: {},
   commentChunk: { isLoading: false, error: null, commentList: [] },
   comment: "",
@@ -72,6 +82,7 @@ const postSlice = createSlice({
     },
     [__getPost.fulfilled]: (state, action) => {
       state.isLoading = false;
+      state.userNickname = action.payload.post.nickname;
       state.post = action.payload.post;
       state.commentChunk.commentList = action.payload.comments;
     },
@@ -100,9 +111,30 @@ const postSlice = createSlice({
     [__addComment.fulfilled]: (state, action) => {
       state.commentChunk.isLoading = false;
       console.log("action.payload", action.payload);
-      state.commentChunk.commentList = [...state.commentChunk.commentList, action.payload];
+      state.commentChunk.commentList = [
+        action.payload,
+        ...state.commentChunk.commentList,
+      ];
+      state.comment = "";
     },
     [__addComment.rejected]: (state, action) => {
+      state.commentChunk.isLoading = false;
+      state.commentChunk.error = action.payload;
+    },
+    [__deleteComment.pending]: (state) => {
+      state.commentChunk.isLoading = true;
+    },
+    [__deleteComment.fulfilled]: (state, action) => {
+      state.commentChunk.isLoading = false;
+      const index = state.commentChunk.commentList.findIndex(
+        (comment) => comment.id === action.payload.commentId
+      );
+      const arr = [...state.commentChunk.commentList];
+      arr.splice(index, 1);
+      state.commentChunk.commentList = arr;
+      state.comment = "";
+    },
+    [__deleteComment.rejected]: (state, action) => {
       state.commentChunk.isLoading = false;
       state.commentChunk.error = action.payload;
     },

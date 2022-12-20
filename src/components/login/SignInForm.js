@@ -65,11 +65,17 @@ const SignInForm = () => {
     $login({
       username: usernameState.value,
       password: passwordState.value,
-    }).then((data) => {
-      localStorage.setItem('jwt',data.data)
-      navigate('/')
-      // data.statusCode===200 ? navigate('/') : alert(data.msg)
-    }).catch(err => console.log(err))
+    })
+      .then((data) => {
+        console.log("data login", data);
+        if (data.statusCode === 200) {
+          localStorage.setItem("jwt",data.data);
+          navigate("/");
+        } else {
+          alert(data.msg);
+        }
+      })
+      .catch((err) => console.log(err));
   };
   const onClickKakaoLogin = () => {
     connectKakao();
@@ -78,7 +84,7 @@ const SignInForm = () => {
   return (
     <Fragment>
       <Stack direction="column">
-      <Wrap style={{ marginTop: "2rem" }}>
+        <Wrap style={{ marginTop: "2rem" }}>
           <Img
             style={{ margin: "2rem 0 0" }}
             wd="23rem"
@@ -96,12 +102,6 @@ const SignInForm = () => {
                   onChange={onChangeHandler}
                   placeholder="아이디"
                 ></StInput>
-                {usernameState.value.length === 0 ? null : (
-                  <Img
-                    className="rightLogo"
-                    src={usernameState.isValid ? check : xMark}
-                  />
-                )}
               </Card>
               <Card style={{ cursor: "pointer" }}>
                 <Img className="leftLogo" src={lockLogo} />
@@ -142,11 +142,7 @@ const SignInForm = () => {
                   <span>카카오 로그인</span>
                 </Button>
               </Stack>
-              <Card hg="auto" direction="column" borderColor="none">
-                <span style={{ marginTop: "1rem", fontSize: "1.3rem" }}>
-                  비밀번호를 잊으셨나요?
-                </span>
-              </Card>
+              <Card hg="auto" direction="column" borderColor="none"></Card>
             </Stack>
           </form>
         </Wrap>
