@@ -35,7 +35,6 @@ const SignInForm = () => {
   const passwordState = useSelector((state) => state.login.password);
 
   const [formIsValid, setFormIsValid] = useState(false);
-  const [statusCode, setStatusCode] = useState(null);
 
   //form 유효성 체크
   useEffect(() => {
@@ -67,11 +66,10 @@ const SignInForm = () => {
       username: usernameState.value,
       password: passwordState.value,
     }).then((data) => {
-      console.log(data)
       localStorage.setItem('jwt',data.data)
       navigate('/')
       // data.statusCode===200 ? navigate('/') : alert(data.msg)
-    });
+    }).catch(err => console.log(err))
   };
   const onClickKakaoLogin = () => {
     connectKakao();
@@ -145,13 +143,6 @@ const SignInForm = () => {
                 </Button>
               </Stack>
               <Card hg="auto" direction="column" borderColor="none">
-                <span className="alert">
-                  {statusCode === 2232
-                    ? messages.idInvalid
-                    : statusCode === 2233
-                    ? messages.pwdInvalid
-                    : ""}
-                </span>
                 <span style={{ marginTop: "1rem", fontSize: "1.3rem" }}>
                   비밀번호를 잊으셨나요?
                 </span>

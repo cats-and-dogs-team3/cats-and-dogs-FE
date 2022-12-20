@@ -4,8 +4,9 @@ import Stack from "../ui/Stack";
 import Comment from "./Comment";
 import CommentForm from "./CommentForm";
 import { useSelector } from "react-redux";
-const Comments = () => {
+const Comments = ({postId}) => {
   const comments = useSelector((state) => state.post.comments);
+  console.log("comments", comments);
   return (
     //comments section
     <Stack
@@ -16,11 +17,11 @@ const Comments = () => {
     >
       {/* comments container*/}
       <StContainer gap="1rem" justify="flex-start" direction={"column"}>
-        {comments.commentList.map((comment) => (
-          <Comment comment={comment} />
+        {comments.map((comment) => (
+          <Comment key={comment.id} comment={comment} />
         ))}
       </StContainer>
-      <CommentForm postId={comments.postId} />
+      <CommentForm postId={postId} />
     </Stack>
   );
 };

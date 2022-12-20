@@ -253,7 +253,7 @@ const UserForm = () => {
                     {passwordCheckState.length < 8 ? null : (
                       <Img
                         className="rightLogo"
-                        src={isPasswordUnMatched.isValid ? xMark : check}
+                        src={isPasswordUnMatched ? xMark : check}
                       />
                     )}
                   </Stack>
