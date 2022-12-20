@@ -27,9 +27,33 @@ export const __liking = createAsyncThunk(
     }
   }
 );
+export const __addComment = createAsyncThunk(
+  "addComment",
+  async (payload, thunkAPI) => {
+    try {
+      const res = await myAxios.post(
+        `/post/${payload.postId}/comment`,
+        payload.comment
+      );
+      console.log("addComment res", res);
+      return thunkAPI.fulfillWithValue(res.data);
+    } catch (error) {
+      console.log("addComment error", error.message);
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+// const initialState = {
+//   post: {},
+//   comments: [],
+//   comment:'',
+//   isLoading: false,
+//   error: null,
+// };
 const initialState = {
   post: {},
-  comments: [],
+  commentChunk: { isLoading: false, error: null, commentList: [] },
+  comment: "",
   isLoading: false,
   error: null,
 };
@@ -37,7 +61,11 @@ const initialState = {
 const postSlice = createSlice({
   name: "post",
   initialState,
-  reducers: {},
+  reducers: {
+    __typeComment: (state, action) => {
+      state.comment = action.payload;
+    },
+  },
   extraReducers: {
     [__getPost.pending]: (state) => {
       state.isLoading = true;
@@ -45,7 +73,7 @@ const postSlice = createSlice({
     [__getPost.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.post = action.payload.post;
-      state.comments = action.payload.comments;
+      state.commentChunk.commentList = action.payload.comments;
     },
     [__getPost.rejected]: (state, action) => {
       state.isLoading = false;
@@ -56,15 +84,29 @@ const postSlice = createSlice({
     },
     [__liking.fulfilled]: (state, action) => {
       state.isLoading = false;
-      console.log("action.payload.postLiked",action.payload.postLiked)
-      state.post.postLike = action.payload.postLiked
-      state.post.likeCount = action.payload.postLiked ? (state.post.likeCount +1) : (state.post.likeCount - 1)
+      console.log("action.payload.postLiked", action.payload.postLiked);
+      state.post.postLike = action.payload.postLiked;
+      state.post.likeCount = action.payload.postLiked
+        ? state.post.likeCount + 1
+        : state.post.likeCount - 1;
     },
     [__liking.rejected]: (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
     },
+    [__addComment.pending]: (state) => {
+      state.commentChunk.isLoading = true;
+    },
+    [__addComment.fulfilled]: (state, action) => {
+      state.commentChunk.isLoading = false;
+      console.log("action.payload", action.payload);
+      state.commentChunk.commentList = [...state.commentChunk.commentList, action.payload];
+    },
+    [__addComment.rejected]: (state, action) => {
+      state.commentChunk.isLoading = false;
+      state.commentChunk.error = action.payload;
+    },
   },
 });
-
+export const { __typeComment } = postSlice.actions;
 export default postSlice.reducer;

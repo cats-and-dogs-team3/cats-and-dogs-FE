@@ -3,7 +3,6 @@ export function isValidEmail(email) {
     /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/
   );
 }
-
 export function isValidId(id) {
   return id.match(/^(?=.*[a-z])(?=.*\d)[a-z\d]{4,10}$/)
 }

@@ -40,7 +40,6 @@ const GlobalStyle = createGlobalStyle`
         /* @media all and (max-width: ${supportDeviceSize}px) {
             font-size: 30.25%;
         } */
- 
   }
   
   * {

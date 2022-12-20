@@ -49,7 +49,7 @@ const Post = ({ postId }) => {
                 src={post.postLike ? likeFilled : likeEmpty}
               />
               <span style={{ fontSize: "2rem" }}>
-                {post.likeCount} 명이 좋아합니다.
+                {post.likeCount !==0 && `${post.likeCount} 명이 좋아합니다.`} 
               </span>
             </Stack>
             <span>
