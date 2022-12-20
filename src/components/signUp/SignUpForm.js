@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-
 import { supportDeviceSize } from "../../shared/GlobalStyle";
 import { useNavigate } from "react-router-dom";
-// import { forIsDuplicated } from "../../utils/utility";
 import { Wrap, Button, Card, Stack, Img } from "../ui/index";
 import { useDispatch, useSelector } from "react-redux";
-import { serverErrors } from "../../dataManager/apiConfig";
+import SignUpFooter from "./SignUpFooter";
+import { $signUp } from "../../dataManager/myQueries";
+
 import {
-  __cleanUp,
-  __submitForm,
   __typeEmail,
   __typeUsername,
   __typeNickname,
@@ -29,8 +27,6 @@ import {
   settingLogo,
   xMark,
 } from "../../asset/signUp";
-import SignUpFooter from "./SignUpFooter";
-import { $signUp } from "../../dataManager/myQueries";
 
 //하단 메세지
 
@@ -152,8 +148,10 @@ const UserForm = () => {
         <Wrap style={{ marginTop: "2rem" }}>
           <Img wd="23rem" hg="18.5rem" src={logo} />
           <p className="intro"> 😸 멍냥의 전당에 오신것을 환영합니다 🐶 </p>
+          {/* form start */}
           <form onSubmit={onSubmitHandler}>
             <Stack gap="1rem">
+              {/* 유저 아이디  */}
               <Card>
                 <Img className="leftLogo" src={settingLogo} />
                 <StInput
@@ -169,6 +167,7 @@ const UserForm = () => {
                   />
                 )}
               </Card>
+              {/* 유저 닉네임 */}
               <Card>
                 <Img className="leftLogo" src={humanLogo} />
                 <StInput
@@ -185,6 +184,7 @@ const UserForm = () => {
                   />
                 )}
               </Card>
+              {/* 유저 이메일 */}
               <Card>
                 <Img className="leftLogo" src={postLogo} />
                 <StInput
@@ -201,6 +201,7 @@ const UserForm = () => {
                   />
                 )}
               </Card>
+              {/* 유저 패스워드 */}
               <Card style={{ cursor: "pointer" }}>
                 <Img className="leftLogo" src={lockLogo} />
                 <StPwdInput
@@ -212,18 +213,23 @@ const UserForm = () => {
                   onChange={onChangeHandler}
                 ></StPwdInput>
                 {passwordState.value.length === 0 ? null : (
-                  <Stack direction="row" onClick={() => dispatch(__showPwd())}>
+                  <Stack direction="row">
+                    {/* 패스워드 보기 / 안보기 */}
                     <Img
+                      onClick={() => dispatch(__showPwd())}
                       style={{ cursor: "pointer" }}
                       className="rightLogo"
                       src={passwordState.isShown ? closedEye : openEye}
                     />
-                    {/* <span className="pwd-alert">
-                      {passwordState.isShown ? "숨기기" : "비밀번호 표시"}
-                    </span> */}
+                    {/* 패스워드 유효성 검사 */}
+                    <Img
+                      className="rightLogo"
+                      src={passwordState.isValid ? check : xMark}
+                    />
                   </Stack>
                 )}
               </Card>
+              {/* 유저 패스워드 체크 */}
               <Card>
                 <Img className="leftLogo" src={lockLogo} />
                 <StPwdInput
@@ -235,15 +241,22 @@ const UserForm = () => {
                   onChange={onChangeHandler}
                 ></StPwdInput>
                 {passwordCheckState.value.length === 0 ? null : (
-                  // <Stack styled={{ marginRight: "4rem" }} direction="row">
-                  <Img
-                    className="rightLogo"
-                    style={{ cursor: "pointer" }}
-                    onClick={() => dispatch(__showPwdCheck())}
-                    // className="check-img-pwd"
-                    src={passwordCheckState.isShown ? closedEye : openEye}
-                  />
-                  // </Stack>
+                  <Stack styled={{ marginRight: "4rem" }} direction="row">
+                    {/* 패스워드 보기 / 안보기 */}
+                    <Img
+                      onClick={() => dispatch(__showPwdCheck())}
+                      className="rightLogo"
+                      style={{ cursor: "pointer" }}
+                      src={passwordCheckState.isShown ? closedEye : openEye}
+                    />
+                    {/* 패스워드 체크 여부 */}
+                    {passwordCheckState.length < 8 ? null : (
+                      <Img
+                        className="rightLogo"
+                        src={isPasswordUnMatched.isValid ? xMark : check}
+                      />
+                    )}
+                  </Stack>
                 )}
               </Card>
               <Button
