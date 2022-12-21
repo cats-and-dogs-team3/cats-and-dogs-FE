@@ -70,6 +70,7 @@ const SignInForm = () => {
         console.log("data login", data);
         if (data.statusCode === 200) {
           localStorage.setItem("jwt",data.data);
+          // dispatch(__clear)
           navigate("/");
         } else {
           alert(data.msg);

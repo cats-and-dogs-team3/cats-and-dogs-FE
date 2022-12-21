@@ -24,7 +24,7 @@ const Comment = ({ comment }) => {
         <ReplyTextArea value={comment.content} readOnly />
       </Stack>
       <Stack direction={"row"} justify="flex-end">
-        {/* {userNickname === comment.nickname ? ( */}
+        {userNickname === comment.nickname ? (
           <MyButton
             onClick={() =>
               dispatch(
@@ -36,7 +36,7 @@ const Comment = ({ comment }) => {
           >
             삭제
           </MyButton>
-        {/* ) : null} */}
+        ) : null}
       </Stack>
     </Card>
   );

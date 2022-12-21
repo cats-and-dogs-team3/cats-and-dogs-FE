@@ -11,7 +11,10 @@ myAxios.interceptors.request.use((config) => {
   return config;
 });
 myAxios.interceptors.response.use((response) => {
-  // console.log("AXIOS RESPONSE TERCEPTOR RESPONSE : ", response.data);
+  console.log("AXIOS RESPONSE TERCEPTOR RESPONSE : ", response);
   return response.data;
+},(error)=>{
+  console.log("AXIOS error interceptors : ",error)
+  return error
 });
 export default myAxios;
