@@ -1,17 +1,46 @@
-import react from "react";
+import react, { useEffect } from "react";
 import styled from "styled-components";
-
+import { useDispatch, useSelector } from "react-redux";
+import { __getBestPost } from "../../redux/modules/bestSlice";
+import uuid from "react-uuid";
+import Like from "../main/Like";
 function RankingBox(prop) {
+  const dispatch = useDispatch();
+
+  const { error, isLoading, best } = useSelector((state) => state.best);
+  let src = "https://mytestbucketqq2.s3.ap-northeast-2.amazonaws.com/";
+  console.log(best);
+
+  useEffect(() => {
+    dispatch(__getBestPost());
+  }, [dispatch]);
+
   return (
-    <StyledRankingBox>
-      <image src="https://openimage.interpark.com/goods_image_big/9/1/2/7/8815609127_l.jpg"></image>
-      <div className="box_title">Initial Title</div>
-      <div className="box_content">Lorem Ipsum ~님의 게시글입니다.</div>
-    </StyledRankingBox>
+    <StyledEmergencyWrapper>
+      {best &&
+        best.map((best) => (
+          <StyledRankingBox Key={uuid}>
+            <img src={(src + best.pictureName).toString}></img>
+            <div>
+              <div className="box_title">{best.title}</div>
+              <div className="box_name">{best.nickname}</div>
+              <div className="box_content">{best.content}</div>
+              <Like likeCount={best.likeCount}></Like>
+            </div>
+          </StyledRankingBox>
+        ))}
+    </StyledEmergencyWrapper>
   );
 }
 export default RankingBox;
 
+const StyledEmergencyWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 100px;
+`;
 const StyledRankingBox = styled.div`
   width: 30%;
   height: 400px;
@@ -20,10 +49,10 @@ const StyledRankingBox = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  image {
+  img {
     width: 90%;
     height: 70%;
-    background: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSz4Jf0QXyGTu6YLz32Wkl2JqqnYz2J3lHy9Q&usqp=CAU");
+
     background-size: contain;
   }
   .box_title {
