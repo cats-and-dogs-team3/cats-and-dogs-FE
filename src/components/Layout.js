@@ -3,10 +3,10 @@ import styled from "styled-components";
 import Footer from "./Footer";
 import Header from "./Header";
 
-const Layout = ({ children, wd }) => {
+const Layout = ({ children, wd, isSignUp }) => {
   return (
     <Container>
-      <Header />
+      {isSignUp||<Header />}
       <StLayout wd={wd}>{children}</StLayout>
       <Footer />
     </Container>
@@ -26,4 +26,7 @@ const StLayout = styled.div`
   width: ${({ wd }) => wd || "140rem"}; // 수정 원값 110rems
   min-width: 80rem;
   flex: 1;
+  @media (max-width: 540px) {
+    width: 100vw;
+  }
 `;

@@ -3,28 +3,28 @@ import styled from "styled-components";
 import Stack from "../ui/Stack";
 import Comment from "./Comment";
 import CommentForm from "./CommentForm";
-const Comments = () => {
-  const commentArr = [
-    { userName: "test", comment: "comment" },
-    { userName: "test", comment: "comment" },
-    { userName: "test", comment: "comment" },
-    { userName: "test", comment: "comment" },
-    { userName: "test", comment: "comment" },
-    { userName: "test", comment: "comment" },
-    { userName: "test", comment: "comment" },
-    { userName: "test", comment: "comment" },
-  ];
+import { useSelector } from "react-redux";
+const Comments = ({ postId }) => {
+  const { commentList, isLoading, error } = useSelector(
+    (state) => state.post.commentChunk
+  );
+  // if(isLoading) return
+  // if(error) return
   return (
     //comments section
-    <Stack gap={'2rem'} justify={"flex-start"} pd={"2rem 0"} direction={"column"}>
+    <Stack
+      gap={"2rem"}
+      justify={"flex-start"}
+      pd={"2rem 0"}
+      direction={"column"}
+    >
       {/* comments container*/}
       <StContainer gap="1rem" justify="flex-start" direction={"column"}>
-        {commentArr.map((comment) => (
-          <Comment comment={comment} />
+        {commentList.map((comment) => (
+          <Comment key={comment.id} comment={comment} />
         ))}
       </StContainer>
-      {/* commentForm */}
-      <CommentForm />
+      <CommentForm postId={postId} />
     </Stack>
   );
 };
@@ -35,7 +35,8 @@ const StContainer = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   gap: 1rem;
-  max-height: 50rem;
+  max-height: 45rem;
+  padding: 2rem;
   overflow-y: scroll;
+  flex: 1;
 `;
-
