@@ -17,3 +17,7 @@ export const $removeToken = () => {
 export const $getToken = () => {
   return localStorage.getItem("jwt");
 };
+export const $kakaoLogin = async (code) => {
+  const data = await myAxios.get(`/user/login/kakao?code=${code}`);
+  return data;
+};
