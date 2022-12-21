@@ -1,19 +1,11 @@
 import react, { useState } from "react";
 import styled from "styled-components";
 
-function Like() {
-  const [like, setLike] = useState(0);
+function Like(prop) {
   return (
     <StyledLike>
-      <div
-        className="icon"
-        onClick={() => {
-          setLike(like + 1);
-        }}
-      >
-        ♥
-      </div>
-      <div className="likeCount">{like}</div>
+      <div className="icon">♥</div>
+      <div className="likeCount">{prop.likeCount}</div>
     </StyledLike>
   );
 }
