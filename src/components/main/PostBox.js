@@ -1,6 +1,7 @@
 import { produceWithPatches } from "immer";
 import react, { useState } from "react";
 import styled from "styled-components";
+import { s3Url } from "../../dataManager/apiConfig";
 import Like from "./Like";
 
 function PostBox(prop) {
@@ -12,7 +13,7 @@ function PostBox(prop) {
     prop.offer.pictureName !== null
   ) {
     src =
-      "https://mytestbucketqq2.s3.ap-northeast-2.amazonaws.com/" +
+      s3Url +
       prop.offer.pictureName;
   } else {
     src = "https://via.placeholder.com/150";

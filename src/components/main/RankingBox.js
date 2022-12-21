@@ -4,12 +4,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { __getBestPost } from "../../redux/modules/bestSlice";
 import uuid from "react-uuid";
 import Like from "../main/Like";
+import { s3Url } from "../../dataManager/apiConfig";
+import { useNavigate } from "react-router-dom";
 function RankingBox(prop) {
+  const navigate = useNavigate()
   const dispatch = useDispatch();
 
   const { error, isLoading, best } = useSelector((state) => state.best);
-  let src = "https://mytestbucketqq2.s3.ap-northeast-2.amazonaws.com/";
-  console.log(best);
+
+  console.log('best',best);
 
   useEffect(() => {
     dispatch(__getBestPost());
@@ -19,8 +22,8 @@ function RankingBox(prop) {
     <StyledEmergencyWrapper>
       {best &&
         best.map((best) => (
-          <StyledRankingBox Key={uuid}>
-            <img src={(src + best.pictureName).toString}></img>
+          <StyledRankingBox  onClick={()=>navigate(`/post/${best.id}`)} key={best.id}>
+            <img alt="" src={s3Url + best.pictureName}></img>
             <div>
               <div className="box_title">{best.title}</div>
               <div className="box_name">{best.nickname}</div>

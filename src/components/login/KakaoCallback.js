@@ -7,7 +7,6 @@ const KakaoCallback = () => {
   const dispatch = useDispatch();
   const url = new URL(window.location.href);
   const urlParams = url.searchParams.get("code");
-  console.log("url params", urlParams);
   $kakaoLogin(urlParams).then((res) => {
     console.log("res", res.statusCode);
     if (res.statusCode === 200) {
