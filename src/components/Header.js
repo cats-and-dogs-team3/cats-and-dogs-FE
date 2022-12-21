@@ -8,7 +8,6 @@ import { useSelector } from "react-redux";
 const Header = () => {
   const navigate = useNavigate();
   const nickname = useSelector(state=>state.nickname.nickname)
-  console.log('nickname header',nickname)
   const onClickHandler = (e) => {
     const { name } = e.target;
     console.log('name',name)

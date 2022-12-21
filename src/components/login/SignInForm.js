@@ -15,6 +15,7 @@ import {
   __typePassword,
   __typeUsername,
   __showPwd,
+  __cleanUp,
 } from "../../redux/modules/loginSlice";
 import { closedEye, openEye } from "../../asset/signUp/index";
 import { connectKakao } from "./func/functionsForLogin";
@@ -69,9 +70,11 @@ const SignInForm = () => {
       .then((data) => {
         console.log("data login", data);
         if (data.statusCode === 200) {
-          localStorage.setItem("jwt",data.data);
-          // dispatch(__clear)
-          navigate("/");
+          if (data.data !== null && data.data.startsWith("bearer")) {
+            localStorage.setItem("jwt", data.data);
+            dispatch(__cleanUp)
+            navigate("/");
+          }
         } else {
           alert(data.msg);
         }

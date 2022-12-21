@@ -1,6 +1,7 @@
 import react, { useState } from "react";
 import AWS from "aws-sdk";
 import { Row, Col, Button, Input, Alert } from "reactstrap";
+import { s3Url } from "../../dataManager/apiConfig";
 
 function S3Upload() {
   const [progress, setProgress] = useState(0); //업로드 과정 %화
@@ -88,7 +89,11 @@ function S3Upload() {
               </Button>
             ) : null}
           </Col>
-          <img src="https://mytestbucketqq2.s3.ap-northeast-2.amazonaws.com/bc62f243-798d-c4fb-b9d5-3b442d2a0ae6.jpeg"></img>
+          <img
+            alt=""
+            src={(s3Url = "" + "bc62f243-798d-c4fb-b9d5-3b442d2a0ae6.jpeg")}
+          ></img>
+          {/* <img src="https://mytestbucketqq2.s3.ap-northeast-2.amazonaws.com/bc62f243-798d-c4fb-b9d5-3b442d2a0ae6.jpeg"></img> */}
         </Row>
       </div>
     </div>

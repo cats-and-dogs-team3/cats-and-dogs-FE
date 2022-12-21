@@ -11,7 +11,6 @@ export const __getBestPost = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const { data } = await instance.get(`/post`);
-      console.log("d", data.data.todaysPets.rank);
       return thunkAPI.fulfillWithValue(data.data.todaysPets.rank);
     } catch (error) {
       console.log(error.message);
@@ -31,7 +30,6 @@ const bestSlice = createSlice({
     [__getBestPost.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.best = action.payload;
-      console.log("b", state);
     },
     [__getBestPost.rejected]: (state, action) => {
       state.isLoading = false;

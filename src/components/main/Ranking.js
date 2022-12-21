@@ -4,7 +4,7 @@ import RankingBox from "./RankingBox";
 function Ranking() {
   return (
     <StyledRanking>
-      <RankingBox></RankingBox>
+      <RankingBox/>
     </StyledRanking>
   );
 }

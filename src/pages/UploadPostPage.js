@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { __uppostPost } from "../redux/modules/uppostSlice";
 import uuid from "react-uuid";
 import AWS, { ServiceCatalogAppRegistry } from "aws-sdk";
+import { $uploadPost } from "../dataManager/myQueries";
 
 const UploadPostPage = () => {
   const KEY = uuid();
@@ -30,9 +31,6 @@ const UploadPostPage = () => {
       const base64 = reader.result;
       if (base64) {
         setImgBase64(base64.toString()); // 파일 base64 상태 업데이트
-        {
-          console.log(base64.toString());
-        }
       }
     };
     if (event.target.files[0]) {
@@ -54,7 +52,9 @@ const UploadPostPage = () => {
     ); // base64 인코딩
     const type = imgBase64.split(";")[0].split("/")[1]; //타입 설정
 
-    console.log(S3_BUCKET);
+    // console.log("encoding-base64", base64Data);
+    // console.log("type", type);
+
     AWS.config.update({
       //AWS 설정
       accessKeyId: ACCESS_KEY,
@@ -103,8 +103,9 @@ const UploadPostPage = () => {
     } else if (post.pictureName.trim() === "") {
       alert("사진업로드를 하지 않으셨습니다.!");
     } else {
-      console.log('state staet',state)
-      dispatch(__uppostPost(state));
+      console.log("state staet", state);
+      // dispatch(__uppostPost(state));
+      $uploadPost(state).then((data) => data.statusCode === 200 && navigate('/'));
     }
   }
 

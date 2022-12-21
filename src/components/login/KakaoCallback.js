@@ -7,12 +7,13 @@ const KakaoCallback = () => {
   const dispatch = useDispatch();
   const url = new URL(window.location.href);
   const urlParams = url.searchParams.get("code");
-  console.log("url params", urlParams);
   $kakaoLogin(urlParams).then((res) => {
     console.log("res", res.statusCode);
     if (res.statusCode === 200) {
-      localStorage.setItem("jwt", res.data);
-      navigate("/");
+      if (res.data !== null && res.data.startsWith("bearer")) {
+        localStorage.setItem("jwt", res.data);
+        navigate("/");
+      }
     } else {
       alert(res.msg);
     }

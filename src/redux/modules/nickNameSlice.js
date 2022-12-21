@@ -8,10 +8,8 @@ export const __getNickName = createAsyncThunk(
   async (payload,thunkAPI) => {
     try {
       const res = await myAxios.get(`/user`);
-      console.log("date getNickName", res.data);
       return thunkAPI.fulfillWithValue(res.data);
     } catch (error) {
-      console.log("getNickName error", error.message);
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -26,7 +24,6 @@ const nicknameSlice = createSlice({
       state.isLoading = true;
     },
     [__getNickName.fulfilled]: (state, action) => {
-      console.log("nick", action.payload);
       state.nickname = action.payload;
     },
     [__getNickName.rejected]: (state, action) => {

@@ -1,27 +1,31 @@
 import { produceWithPatches } from "immer";
 import react, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { s3Url } from "../../dataManager/apiConfig";
 import Like from "./Like";
 
 function PostBox(prop) {
   let time = prop.offer.modifiedAt.split("T")[0];
-
+  const navigate = useNavigate();
+  console.log('postBox prop : ',prop.offer.id)
+  const onClickItemHandler = () => {
+    navigate(`/post/${prop.offer.id}`);
+  };
   let src = "";
   if (
     prop.offer.pictureName !== "pictureName" &&
     prop.offer.pictureName !== null
   ) {
-    src =
-      "https://mytestbucketqq2.s3.ap-northeast-2.amazonaws.com/" +
-      prop.offer.pictureName;
+    src = s3Url + prop.offer.pictureName;
   } else {
     src = "https://via.placeholder.com/150";
   }
-
-  console.log(src.toString());
+  console.log('postbox src', src)
+  console.log('postbox type of src', typeof src)
   return (
-    <StyledPostBox>
-      <img src={src.toString()}></img>
+    <StyledPostBox onClick={onClickItemHandler}>
+      <img alt="" src={src}></img>
       <div className="title_box">
         <div className="title">{prop.offer.title}</div>
         <Like
