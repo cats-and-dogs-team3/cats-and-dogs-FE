@@ -82,7 +82,7 @@ const postSlice = createSlice({
     },
     [__getPost.fulfilled]: (state, action) => {
       state.isLoading = false;
-      state.userNickname = action.payload.post.nickname;
+      // state.userNickname = action.payload.post.nickname;
       state.post = action.payload.post;
       state.commentChunk.commentList = action.payload.comments;
     },
@@ -95,9 +95,9 @@ const postSlice = createSlice({
     },
     [__liking.fulfilled]: (state, action) => {
       state.isLoading = false;
-      console.log("action.payload.postLiked", action.payload.postLiked);
+      console.log("action.payload.postLiked", action.payload);
       state.post.postLike = action.payload.postLiked;
-      state.post.likeCount = action.payload.postLiked
+      state.post.likeCount = action.payload.likeCount
         ? state.post.likeCount + 1
         : state.post.likeCount - 1;
     },

@@ -3,9 +3,12 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import MyButton from "./ui/MyButton";
 import { $getToken, $logout, $removeToken } from "../dataManager/myQueries";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const navigate = useNavigate();
+  const nickname = useSelector(state=>state.nickname.nickname)
+  console.log('nickname header',nickname)
   const onClickHandler = (e) => {
     const { name } = e.target;
     console.log('name',name)
@@ -27,7 +30,7 @@ const Header = () => {
       </MainTitle>
       <span>
         {$getToken()
-          ? "항해99 집사님 환영합니다 😸"
+          ? `${nickname} 집사님 환영합니다 😸`
           : "멍멍 ! 로그인을 해주세요 주인님 ! 🐶"}
       </span>
       {$getToken() ? (

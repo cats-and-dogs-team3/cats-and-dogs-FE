@@ -8,7 +8,7 @@ import { __addComment, __typeComment } from "../../redux/modules/postSlice";
 import { NickName } from "./Comment";
 
 const CommentForm = ({ postId }) => {
-  const userNickname = useSelector((state) => state.post.userNickname);
+  const nickname = useSelector((state) => state.nickname.nickname);
 
   const commentState = useSelector((state) => state.post.comment);
   console.log("commentform", commentState);
@@ -32,7 +32,7 @@ const CommentForm = ({ postId }) => {
         direction={"column"}
       >
         <Stack align={"flex-start"} direction={"column"}>
-          <NickName className="userName">{userNickname}</NickName>
+          <NickName className="userName">{nickname}</NickName>
           <StContainer>
             <textarea
               rows={3}

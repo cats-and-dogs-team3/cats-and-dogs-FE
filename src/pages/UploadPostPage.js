@@ -47,7 +47,6 @@ const UploadPostPage = () => {
     const REGION = process.env.REACT_APP_REGION;
     const S3_BUCKET = process.env.REACT_APP_S3_BUCKET;
 
-    console.log(ACCESS_KEY, SECRET_ACCESS_KEY, REGION, S3_BUCKET);
     window.Buffer = window.Buffer || require("buffer").Buffer;
     const base64Data = new Buffer.from(
       imgBase64.replace(/^data:image\/\w+;base64,/, ""),
@@ -104,6 +103,7 @@ const UploadPostPage = () => {
     } else if (post.pictureName.trim() === "") {
       alert("사진업로드를 하지 않으셨습니다.!");
     } else {
+      console.log('state staet',state)
       dispatch(__uppostPost(state));
     }
   }

@@ -10,8 +10,7 @@ export const __getPost = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       const { data } = await instance.get(`/post`);
-
-      console.log("approaching mainSlice");
+      console.log("approaching mainSlice", data);
       console.log(data.data.postList.postResponseDtoList);
       return thunkAPI.fulfillWithValue(data.data.postList.postResponseDtoList);
     } catch (error) {
