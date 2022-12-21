@@ -42,10 +42,10 @@ const UploadPostPage = () => {
   };
 
   function uploadFileHandler() {
-    const ACCESS_KEY = process.env.ACCESS_KEY;
-    const SECRET_ACCESS_KEY = process.env.SECRET_ACCESS_KEY; //시크릿엑세스키 env화
-    const REGION = process.env.REGION;
-    const S3_BUCKET = process.env.S3_BUCKET;
+    const ACCESS_KEY = process.env.REACT_APP_ACCESS_KEY;
+    const SECRET_ACCESS_KEY = process.env.REACT_APP_SECRET_ACCESS_KEY; //시크릿엑세스키 env화
+    const REGION = process.env.REACT_APP_REGION;
+    const S3_BUCKET = process.env.REACT_APP_S3_BUCKET;
     window.Buffer = window.Buffer || require("buffer").Buffer;
     const base64Data = new Buffer.from(
       imgBase64.replace(/^data:image\/\w+;base64,/, ""),
@@ -104,6 +104,7 @@ const UploadPostPage = () => {
     } else if (post.pictureName.trim() === "") {
       alert("사진업로드를 하지 않으셨습니다.!");
     } else {
+      console.log('state staet',state)
       dispatch(__uppostPost(state));
     }
   }

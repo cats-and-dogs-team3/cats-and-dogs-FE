@@ -21,7 +21,7 @@ export const __uppostPost = createAsyncThunk(
       payload = dispenser;
       console.log(dispenser);
       const { data } = await instance.post(`/post`, dispenser);
-      console.log(payload);
+      console.log('response data', data);
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       console.log(error.message);
