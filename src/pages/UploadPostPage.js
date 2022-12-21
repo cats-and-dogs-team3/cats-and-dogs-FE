@@ -42,10 +42,12 @@ const UploadPostPage = () => {
   };
 
   function uploadFileHandler() {
-    const ACCESS_KEY = process.env.ACCESS_KEY;
-    const SECRET_ACCESS_KEY = process.env.SECRET_ACCESS_KEY; //시크릿엑세스키 env화
-    const REGION = process.env.REGION;
-    const S3_BUCKET = process.env.S3_BUCKET;
+    const ACCESS_KEY = process.env.REACT_APP_ACCESS_KEY;
+    const SECRET_ACCESS_KEY = process.env.REACT_APP_SECRET_ACCESS_KEY; //시크릿엑세스키 env화
+    const REGION = process.env.REACT_APP_REGION;
+    const S3_BUCKET = process.env.REACT_APP_S3_BUCKET;
+
+    console.log(ACCESS_KEY, SECRET_ACCESS_KEY, REGION, S3_BUCKET);
     window.Buffer = window.Buffer || require("buffer").Buffer;
     const base64Data = new Buffer.from(
       imgBase64.replace(/^data:image\/\w+;base64,/, ""),
@@ -53,19 +55,17 @@ const UploadPostPage = () => {
     ); // base64 인코딩
     const type = imgBase64.split(";")[0].split("/")[1]; //타입 설정
 
-    console.log("encoding-base64", base64Data);
-    console.log("type", type);
+    console.log(S3_BUCKET);
     AWS.config.update({
       //AWS 설정
       accessKeyId: ACCESS_KEY,
       secretAccessKey: SECRET_ACCESS_KEY,
     });
-    console.log("1" + KEY + "." + type);
+
     setPost({
       ...post,
       pictureName: KEY + "." + type,
     });
-    console.log(post);
 
     const upload = new AWS.S3.ManagedUpload({
       params: {
