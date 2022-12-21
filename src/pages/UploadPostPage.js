@@ -41,8 +41,11 @@ const UploadPostPage = () => {
     }
   };
 
-  function filenullcheck() {}
   function uploadFileHandler() {
+    const ACCESS_KEY = process.env.ACCESS_KEY;
+    const SECRET_ACCESS_KEY = process.env.SECRET_ACCESS_KEY; //시크릿엑세스키 env화
+    const REGION = process.env.REGION;
+    const S3_BUCKET = process.env.S3_BUCKET;
     window.Buffer = window.Buffer || require("buffer").Buffer;
     const base64Data = new Buffer.from(
       imgBase64.replace(/^data:image\/\w+;base64,/, ""),
