@@ -16,25 +16,19 @@ function MainSlider() {
     <div>
       <StyledSlider {...settings}>
         <div className="carousel1">
-          <h3>
-            당신은 네모네모 멈뭄미와 눈이 마주쳤습니다. 담심음이제 돔그람 글자를
-            칠수멈슴니다 멈멈
-          </h3>
+          <h3>살려줘.. 자고싶어..</h3>
         </div>
         <div className="carousel2">
-          <h3></h3>
+          <h3>노는게.. 제일좋아..</h3>
         </div>
         <div className="carousel3">
-          <h3>3</h3>
+          <h3>앞으로.. 프론트엔드는 최소3명..주세요 ㅜ</h3>
         </div>
         <div className="carousel4">
-          <h3>4</h3>
+          <h3>그렇게 해줄수 있잖아요 그쵸?</h3>
         </div>
         <div className="carousel5">
-          <h3>5</h3>
-        </div>
-        <div className="carousel6">
-          <h3>6</h3>
+          <h3>아니라고 하지마요 제발 ㅠ.. </h3>
         </div>
       </StyledSlider>
     </div>
@@ -69,31 +63,44 @@ const StyledSlider = styled(Slider)`
   h3 {
     position: relative;
     color: white;
-    top: 15rem;
+    top: 24rem;
     left: 25rem;
     font-size: 2.4rem;
   }
 
   .carousel1 {
-    background: url("https://img2.daumcdn.net/thumb/R658x0.q70/?fname=https://t1.daumcdn.net/news/202105/25/petzzi/20210525052241977eizj.jpg");
-    background-position: top 500px;
+    background: url("./img/cat1.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 30% 50%;
   }
 
   .carousel2 {
-    background: url("https://i3.ruliweb.com/img/17/12/15/16058081b5b4aa5ac.png");
+    background: url("./img/cat2.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 30% 30%;
   }
 
   .carousel3 {
-    background: url("https://images.mypetlife.co.kr/content/uploads/2020/04/09150916/%EB%A7%9D%EA%B3%A0%EB%84%A4-%EB%B0%B0%EB%84%88.png");
-    object-fit: contain;
+    background: url("./img/kittens-g68ffc1a41_1920.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 30% 40%;
   }
 
   .carousel4 {
-    background: url("https://nebalro.kr/wp-content/uploads/2021/01/%EB%84%A4%EB%B0%9C%EB%A1%9C-%EB%B0%B0%EB%84%88-1.png");
+    background: url("./img/cat-g84de19075_1920.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 30% 60%;
   }
 
   .carousel5 {
-    background: url("image.png");
+    background: url("./img/puppy-g674c0d9a9_1280.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 30% 80%;
   }
 
   .carousel6 {
