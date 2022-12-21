@@ -9,7 +9,7 @@ const Header = () => {
   const onClickHandler = (e) => {
     const { name } = e.target;
     console.log('name',name)
-    if (name === "로그아웃") {
+    if (name === "logout") {
       $removeToken();
       navigate("/");
     } else {
@@ -31,11 +31,11 @@ const Header = () => {
           : "멍멍 ! 로그인을 해주세요 주인님 ! 🐶"}
       </span>
       {$getToken() ? (
-        <MyButton onClick={onClickHandler} mg="0 0 0 2rem">
+        <MyButton name='logout' onClick={onClickHandler} mg="0 0 0 2rem">
           로그아웃
         </MyButton>
       ) : (
-        <MyButton onClick={onClickHandler} mg="0 0 0 2rem">
+        <MyButton name='login' onClick={onClickHandler} mg="0 0 0 2rem">
           로그인
         </MyButton>
       )}

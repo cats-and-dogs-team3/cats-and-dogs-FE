@@ -17,6 +17,7 @@ const Post = ({ postId }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const post = useSelector((state) => state.post.post);
+  console.log('post data',post)
   const onClickLikeHandler = () => {
     dispatch(__liking(postId));
   };
