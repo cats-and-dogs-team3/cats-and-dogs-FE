@@ -6,8 +6,9 @@ const myAxios = axios.create({ baseURL: serverUrl });
 myAxios.interceptors.request.use((config) => {
   if (config === undefined) return;
   const token = localStorage.getItem("jwt");
-  config.headers["Access-Control-Allow-Origin"] = "*";
+  console.log('intercepter request', token)
   config.headers["Authorization"] = token;
+  config.headers["Access-Control-Allow-Origin"] = "*";
   return config;
 });
 myAxios.interceptors.response.use((response) => {

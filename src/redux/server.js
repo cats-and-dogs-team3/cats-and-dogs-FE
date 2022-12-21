@@ -1,8 +1,8 @@
 import axios from "axios";
+import { serverUrl } from "../dataManager/apiConfig";
 
 export const instance = axios.create({
-  baseURL: "http://43.200.163.0:8080/",
-
+  baseURL: serverUrl,
   headers: {
     "Access-Control-Allow-Origin": "*",
   },
@@ -22,7 +22,7 @@ export const instance = axios.create({
 instance.interceptors.request.use((config) => {
   if (config.headers === undefined) return;
 
-  const token = localStorage.getItem("id");
+  const token = localStorage.getItem("jwt");
   config.headers["Authorization"] = `${token}`;
   return config;
 });
