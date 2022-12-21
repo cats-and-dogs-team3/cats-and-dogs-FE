@@ -75,6 +75,18 @@ const postSlice = createSlice({
     __typeComment: (state, action) => {
       state.comment = action.payload;
     },
+    __editTitle: (state,action)=>{
+      state.post.title = action.payload
+    },
+    __editContent: (state,action)=>{
+      state.post.content = action.payload
+    },
+    __editCategory: (state,action)=>{
+      state.post.category = action.payload
+    },
+    __editPictureName: (state,action)=>{
+      state.post.pictureName = action.payload
+    }
   },
   extraReducers: {
     [__getPost.pending]: (state) => {
@@ -137,5 +149,5 @@ const postSlice = createSlice({
     },
   },
 });
-export const { __typeComment } = postSlice.actions;
+export const { __typeComment,__editContent,__editCategory,__editTitle,__editPictureName } = postSlice.actions;
 export default postSlice.reducer;

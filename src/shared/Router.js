@@ -18,7 +18,7 @@ const Router = () => {
           <Route path="/post/:postId" element={<DetailPage />} />
           <Route path="/sign-in" element={<SignInPage />} />
           <Route path="/upload" element={<UploadPageRefactored />} />
-          <Route path="/edit" element={<EditPage />} />
+          <Route path="/edit/:postId" element={<EditPage />} />
           <Route path="/update/:postId" element={<UploadPostPage />} />
           <Route path="/sign-up" element={<SignUpPage />} />
           <Route path="/kakaoCallback" element={<KakaoCallback />} />

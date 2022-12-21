@@ -72,7 +72,7 @@ const SignInForm = () => {
         if (data.statusCode === 200) {
           if (data.data !== null && data.data.startsWith("bearer")) {
             localStorage.setItem("jwt", data.data);
-            dispatch(__cleanUp)
+            dispatch(__cleanUp);
             navigate("/");
           }
         } else {

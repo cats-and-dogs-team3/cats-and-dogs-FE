@@ -1,10 +1,8 @@
 import React from "react";
-import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { $kakaoLogin, $submitForm } from "../../dataManager/myQueries";
+import { $kakaoLogin } from "../../dataManager/myQueries";
 const KakaoCallback = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   const url = new URL(window.location.href);
   const urlParams = url.searchParams.get("code");
   $kakaoLogin(urlParams).then((res) => {
@@ -20,6 +18,6 @@ const KakaoCallback = () => {
     console.log(res);
   });
 
-  return <div>hi</div>;
+  return 
 };
 export default KakaoCallback;
