@@ -5,7 +5,6 @@ function Ranking() {
   return (
     <StyledRanking>
       <RankingBox></RankingBox>
-      <RankingBox></RankingBox>
     </StyledRanking>
   );
 }
@@ -14,8 +13,9 @@ export default Ranking;
 const StyledRanking = styled.div`
   width: 100%;
   height: fit-content;
-  margin-top: 15px;
+  margin-top: 1.5rem;
   display: flex;
   gap: 100px;
   justify-content: center;
+  flex-direction: column;
 `;

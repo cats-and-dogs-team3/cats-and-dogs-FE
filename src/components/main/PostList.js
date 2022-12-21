@@ -1,21 +1,20 @@
-import react from "react";
 import styled from "styled-components";
 import PostBox from "./PostBox";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { __getPost } from "../../redux/modules/mainSlice";
+import { useEffect } from "react";
 function PostList() {
+  const dispatch = useDispatch();
+  const { error, isLoading, post } = useSelector((state) => state.main); // 리듀서 명의
+  console.log({ post });
+  useEffect(() => {
+    dispatch(__getPost());
+  }, [dispatch]);
   return (
     <StyledPostList>
-      <PostBox></PostBox>
-      <PostBox></PostBox>
-      <PostBox></PostBox>
-      <PostBox></PostBox>
-      <PostBox></PostBox>
-      <PostBox></PostBox>
-      <PostBox></PostBox>
-      <PostBox></PostBox>
-      <PostBox></PostBox>
-      <PostBox></PostBox>
-      <PostBox></PostBox>
-      <PostBox></PostBox>
+      {post &&
+        post.map((posts) => <PostBox key={posts.id} offer={posts}></PostBox>)}
     </StyledPostList>
   );
 }
