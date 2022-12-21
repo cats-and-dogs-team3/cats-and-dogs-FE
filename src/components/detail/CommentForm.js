@@ -5,17 +5,21 @@ import MyButton from "../ui/MyButton";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { __addComment, __typeComment } from "../../redux/modules/postSlice";
+import { NickName } from "./Comment";
 
 const CommentForm = ({ postId }) => {
+  const userNickname = useSelector((state) => state.post.userNickname);
+
   const commentState = useSelector((state) => state.post.comment);
   console.log("commentform", commentState);
   const dispatch = useDispatch();
-  const user = { userName: "mcho" };
   const onChangeHandler = (e) => {
     dispatch(__typeComment(e.target.value));
   };
   const onSubmitHandler = () => {
-    dispatch(__addComment({ postId: postId, comment: {content:commentState} }));
+    dispatch(
+      __addComment({ postId: postId, comment: { content: commentState } })
+    );
   };
   return (
     <Div>
@@ -28,7 +32,7 @@ const CommentForm = ({ postId }) => {
         direction={"column"}
       >
         <Stack align={"flex-start"} direction={"column"}>
-          <span className="userName">{user.userName}</span>
+          <NickName className="userName">{userNickname}</NickName>
           <StContainer>
             <textarea
               rows={3}
@@ -54,7 +58,7 @@ const CommentForm = ({ postId }) => {
 
 export default CommentForm;
 const Div = styled.div`
-  margin-top: 3rem;
+  margin-top: 1rem;
   .userName {
     font-size: 2.2rem;
     font-weight: 700;
@@ -69,6 +73,7 @@ const StContainer = styled.div`
     border: none;
     font-size: 1.5rem;
     resize: none;
+    margin-top: 0.3rem;
     &:focus {
       outline: none;
     }

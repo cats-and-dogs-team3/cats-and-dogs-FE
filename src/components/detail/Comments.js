@@ -8,13 +8,8 @@ const Comments = ({ postId }) => {
   const { commentList, isLoading, error } = useSelector(
     (state) => state.post.commentChunk
   );
-  console.log('commentList',commentList)
-  console.log('isLoading',isLoading)
-  console.log('error',error)
-  if(isLoading) return <div>loading</div>
-  if(error) return alert(error)
-  console.log('commentList',commentList)
-  // console.log("comments", comments[10].id);
+  // if(isLoading) return
+  // if(error) return
   return (
     //comments section
     <Stack
@@ -40,7 +35,7 @@ const StContainer = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   gap: 1rem;
-  max-height: 50rem;
+  max-height: 45rem;
   padding: 2rem;
   overflow-y: scroll;
   flex: 1;
