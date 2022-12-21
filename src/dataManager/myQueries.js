@@ -24,7 +24,7 @@ export const $getToken = () => {
   return localStorage.getItem("jwt");
 };
 export const $uploadPost = async (dispenser) => {
-  console.log(dispenser);
+  console.log('dispenser',dispenser);
   const data = await myAxios.post(`/post`, dispenser);
   console.log("response data", data);
   return data

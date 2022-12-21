@@ -8,7 +8,6 @@ import Like from "./Like";
 function PostBox(prop) {
   let time = prop.offer.modifiedAt.split("T")[0];
   const navigate = useNavigate();
-  console.log('postBox prop : ',prop.offer.id)
   const onClickItemHandler = () => {
     navigate(`/post/${prop.offer.id}`);
   };
@@ -21,8 +20,6 @@ function PostBox(prop) {
   } else {
     src = "https://via.placeholder.com/150";
   }
-  console.log('postbox src', src)
-  console.log('postbox type of src', typeof src)
   return (
     <StyledPostBox onClick={onClickItemHandler}>
       <img alt="" src={src}></img>
