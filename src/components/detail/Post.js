@@ -12,6 +12,7 @@ import Stack, { StStack } from "../ui/Stack";
 import { likeEmpty, likeFilled, threeCats } from "../../asset";
 
 import { __getPost, __liking } from "../../redux/modules/postSlice";
+import { $deletePost } from "../../dataManager/myQueries";
 
 const Post = ({ postId }) => {
   const navigate = useNavigate();
@@ -23,11 +24,21 @@ const Post = ({ postId }) => {
   };
   useEffect(() => {
     dispatch(__getPost(postId));
-  }, [dispatch,postId]);
+  }, [dispatch, postId]);
   const onClickHandler = (e) => {
     const { name } = e.target;
     if (name === "edit") navigate("/");
-    // else dispatch(__deletePost)
+    if (name === "delete") {
+      $deletePost(postId).then((res) => {
+        console.log('status 200 : ',res.statusCode ===200)
+        if (res.statusCode === 200) {
+          alert(res.msg);
+          navigate("/");
+        } else {
+          alert(res.msg);
+        }
+      });
+    }
   };
   return (
     <Fragment>
@@ -50,7 +61,7 @@ const Post = ({ postId }) => {
                 src={post.postLike ? likeFilled : likeEmpty}
               />
               <span style={{ fontSize: "2rem" }}>
-                {post.likeCount !==0 && `${post.likeCount} 명이 좋아합니다.`} 
+                {post.likeCount !== 0 && `${post.likeCount} 명이 좋아합니다.`}
               </span>
             </Stack>
             <span>
@@ -64,12 +75,16 @@ const Post = ({ postId }) => {
           <ContentContainer>
             <textarea value={post.content} readOnly></textarea>
           </ContentContainer>
-          <Stack pd="0 2rem 2rem 0" justify={"flex-end"}>
-            <MyButton name="edit" onClick={onClickHandler}>
-              게시물 수정
-            </MyButton>
-            <MyButton name="delete">게시물 삭제</MyButton>
-          </Stack>
+          {nickname === post.nickname ? (
+            <Stack pd="0 2rem 2rem 0" justify={"flex-end"}>
+              <MyButton name="edit" onClick={onClickHandler}>
+                게시물 수정
+              </MyButton>
+              <MyButton name="delete" onClick={onClickHandler}>
+                게시물 삭제
+              </MyButton>
+            </Stack>
+          ) : null}
         </Stack>
       </MyStack>
     </Fragment>

@@ -10,8 +10,10 @@ const KakaoCallback = () => {
   $kakaoLogin(urlParams).then((res) => {
     console.log("res", res.statusCode);
     if (res.statusCode === 200) {
-      localStorage.setItem("jwt", res.data);
-      navigate("/");
+      if (res.data !== null && res.data.startsWith("bearer")) {
+        localStorage.setItem("jwt", res.data);
+        navigate("/");
+      }
     } else {
       alert(res.msg);
     }

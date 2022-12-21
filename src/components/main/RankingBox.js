@@ -12,7 +12,6 @@ function RankingBox(prop) {
 
   const { error, isLoading, best } = useSelector((state) => state.best);
 
-  console.log('best',best);
 
   useEffect(() => {
     dispatch(__getBestPost());

@@ -5,11 +5,12 @@ const initialState = {
   isLoading: false,
   error: null,
 };
-export const __getPost = createAsyncThunk(
-  "getPost",
+export const __getPosts = createAsyncThunk(
+  "getPosts",
   async (payload, thunkAPI) => {
     try {
       const { data } = await instance.get(`/post`);
+      console.log('getPost data : ',data)
       console.log(data.data.postList.postResponseDtoList);
       return thunkAPI.fulfillWithValue(data.data.postList.postResponseDtoList);
     } catch (error) {
@@ -25,14 +26,14 @@ const mainSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: {
-    [__getPost.pending]: (state) => {
+    [__getPosts.pending]: (state) => {
       state.isLoading = true;
     },
-    [__getPost.fulfilled]: (state, action) => {
+    [__getPosts.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.post = action.payload;
     },
-    [__getPost.rejected]: (state, action) => {
+    [__getPosts.rejected]: (state, action) => {
       state.error = action.payload;
     },
 

@@ -24,11 +24,12 @@ const loginSlice = createSlice({
     __showPwd: (state, action) => {
       state.password.isShown = !state.password.isShown;
     },
-    __clearUp: (state, action) => {
-      state = initialState
+    __cleanUp: (state, action) => {
+      state = initialState;
     },
   },
 });
-export const { __typeUsername, __typePassword, __showPwd } = loginSlice.actions;
+export const { __typeUsername, __typePassword, __showPwd, __cleanUp } =
+  loginSlice.actions;
 
 export default loginSlice.reducer;

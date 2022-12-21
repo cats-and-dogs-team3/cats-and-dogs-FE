@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 function App() {
   const dispatch = useDispatch();
 
-  if ($getToken !== null && $getToken().startsWith("bearer")) {
+  if ($getToken()?.startsWith("bearer")) {
     dispatch(__getNickName());
   }
   return (
