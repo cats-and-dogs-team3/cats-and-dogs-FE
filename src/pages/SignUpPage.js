@@ -1,11 +1,13 @@
-import React from 'react'
+import React from "react";
+import Layout from "../components/Layout";
+import SignUpForm from "../components/signUp/SignUpForm";
 
 const SignUpPage = () => {
   return (
-    <div>
-      
-    </div>
-  )
-}
+    <Layout wd={"1200"} isSignUp={true}>
+      <SignUpForm />
+    </Layout>
+  );
+};
 
-export default SignUpPage
+export default SignUpPage;

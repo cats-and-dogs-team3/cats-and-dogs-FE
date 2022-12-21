@@ -1,12 +1,17 @@
 import React from "react";
 import Layout from "../components/Layout";
-import Main from "../components/main/Main";
-
+import MainSlider from "../components/main/MainSlider";
+import RankingBar from "../components/main/RankingBar";
+import Ranking from "../components/main/Ranking";
+import PostList from "../components/main/PostList";
 const MainPage = () => {
   return (
     <div>
       <Layout>
-        <Main />
+        <MainSlider />
+        <RankingBar />
+        <Ranking />
+        <PostList />
       </Layout>
     </div>
   );
