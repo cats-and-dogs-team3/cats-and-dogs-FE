@@ -25,7 +25,8 @@ const loginSlice = createSlice({
       state.password.isShown = !state.password.isShown;
     },
     __cleanUp: (state, action) => {
-      state = initialState;
+      state.username = initialState.username;
+      state.password = initialState.password;
     },
   },
 });
