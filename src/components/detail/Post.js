@@ -9,7 +9,7 @@ import { Like } from "../ui/Like";
 import { Img } from "../ui/Img";
 import MyButton from "../ui/MyButton";
 import Stack, { StStack } from "../ui/Stack";
-import { likeEmpty, likeFilled, threeCats } from "../../asset";
+import { likeEmpty, likeFilled } from "../../asset/post";
 
 import { __getPost, __liking } from "../../redux/modules/postSlice";
 import { $deletePost, $getToken } from "../../dataManager/myQueries";
