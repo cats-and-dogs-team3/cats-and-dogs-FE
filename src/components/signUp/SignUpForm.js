@@ -27,7 +27,7 @@ import {
   settingLogo,
   xMark,
 } from "../../asset/signUp";
-
+import { likeEmpty } from "../../asset/post";
 //하단 메세지
 
 const UserForm = () => {
@@ -288,6 +288,7 @@ const UserForm = () => {
             </Stack>
           </form>
         </Wrap>
+        <Img src={likeEmpty}/>
         <SignUpFooter />
       </Stack>
     </Fragment>
