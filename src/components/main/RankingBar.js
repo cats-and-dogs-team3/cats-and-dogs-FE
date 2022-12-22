@@ -2,15 +2,18 @@ import react from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import MyButton from "../ui/MyButton";
+import { $getToken } from "../../dataManager/myQueries";
+import { requestLogin } from "../../dataManager/messages";
 
 function RankingBar() {
   const navigate = useNavigate();
   return (
     <StyledRankingBar>
       <h1> !! Today's pet !! </h1>
+
       <MyButton
         onClick={() => {
-          navigate("/upload");
+         $getToken() ? navigate("/upload") : alert(requestLogin)
         }}
       >
         새 글 쓰기!

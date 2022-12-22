@@ -38,7 +38,7 @@ export const StStack = styled.div`
   width: ${({wd})=> wd || '100%'};
   height: ${({hg})=> hg || 'none'};
   display: flex;
-  width: ${({ wd }) => wd || "row"};
+  width: ${({ wd }) => wd || "100%"};
   flex-direction: ${({ direction }) => direction || "row"};
   align-items: ${({ align }) => align || "center"};
   justify-content: ${({ justify }) => justify || "center"};
