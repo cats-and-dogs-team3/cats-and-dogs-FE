@@ -14,16 +14,16 @@ const GlobalStyle = createGlobalStyle`
 
     //sign-up
     --color-yellow: #F8D706;
-  --color-gray: #B2B2B2;
-  --color-primary: #2E90FA;
-  --color-light-gray:#7F7F7F;
-  --color-login-background:#F6F6F6;
-  --color-black:#2F1B1A;
-  --color-white:#FFFFFF;
-  --color-red:#F04438;
-  --color-subtle-gray:#CCCCCC;
-  --color-primary-invalid:#B2DDFF;
-  }
+    --color-gray: #B2B2B2;
+    --color-primary: #2E90FA;
+    --color-light-gray:#7F7F7F;
+    --color-login-background:#F6F6F6;
+    --color-black:#2F1B1A;
+    --color-white:#FFFFFF;
+    --color-red:#F04438;
+    --color-subtle-gray:#CCCCCC;
+    --color-primary-invalid:#B2DDFF;
+    }
   @font-face {
       font-family: 'Goyang';
       src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/Goyang.woff') format('woff');
