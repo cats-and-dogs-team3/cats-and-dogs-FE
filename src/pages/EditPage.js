@@ -3,7 +3,7 @@ import Layout from "../components/Layout";
 import styled from "styled-components";
 import Mybutton from "../components/ui/MyButton";
 import { useNavigate, useParams } from "react-router-dom";
-import { $updatePost, $uploadPost } from "../dataManager/myQueries";
+import { $updatePost } from "../dataManager/myQueries";
 import { uploadImageToS3 } from "../dataManager/imageQueries";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -23,9 +23,7 @@ const UploadPostPage = () => {
     dispatch(__getPost(postId));
   }, [dispatch, postId]);
 
-  console.log("postForEdit", post);
   const navigate = useNavigate();
-  const [imgBase64, setImgBase64] = useState("");
   if (isLoading) return;
   if (error) alert(error);
 
@@ -36,24 +34,23 @@ const UploadPostPage = () => {
       if (base64) {
         // setImgBase64(base64.toString());
         uploadImageToS3(base64.toString())
-        .then((res) => {
-          console.log("res", res);
-          if (res.Key !== null || res.Key !== undefined) {
-            dispatch(__editPictureName(res.Key));
-          } else {
-            alert("에러", res.Key);
-          }
-        })
-        .catch((err) => {
-          alert("업로드 실패");
-        });
+          .then((res) => {
+            console.log("res", res);
+            if (res.Key !== null || res.Key !== undefined) {
+              dispatch(__editPictureName(res.Key));
+            } else {
+              alert("에러", res.Key);
+            }
+          })
+          .catch((err) => {
+            alert("업로드 실패");
+          });
       }
     };
     if (event.target.files[0]) {
       reader.readAsDataURL(event.target.files[0]);
     }
   };
-
 
   function onSubmitHandler() {
     if (post.title.trim() === "") {
@@ -65,15 +62,15 @@ const UploadPostPage = () => {
     } else if (post.pictureName.trim() === "") {
       alert("사진업로드를 하지 않으셨습니다.!");
     } else {
-      $updatePost(postId,{
+      $updatePost(postId, {
         title: post.title,
         content: post.content,
         pictureName: post.pictureName,
         category: post.category,
       }).then((data) => {
-        if(data.statusCode === 200) {
-          alert('게시물이 정상적으로 수정되었습니다 🐾')
-          navigate('/')
+        if (data.statusCode === 200) {
+          alert("게시물이 정상적으로 수정되었습니다 🐾");
+          navigate("/");
         }
       });
     }
@@ -109,7 +106,7 @@ const UploadPostPage = () => {
                   id="imgFile"
                   onChange={changeFileHandler}
                 />
-             
+
                 <label>카테고리</label>
                 <select
                   value={post.category}
@@ -255,7 +252,7 @@ const StyledUploadPage = styled.div`
     display: flex;
     justify-content: flex-end;
   }
-  .content_zone { 
+  .content_zone {
     margin-left: 2rem;
   }
 `;
