@@ -13,6 +13,7 @@ const Header = () => {
     console.log('name',name)
     if (name === "logout") {
       $removeToken();
+      alert('로그아웃 되었습니다.')
       navigate("/");
     } else {
       navigate("/sign-in");
