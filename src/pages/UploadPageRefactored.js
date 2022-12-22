@@ -35,6 +35,7 @@ const UploadPostPage = () => {
         console.log("res", res);
         if (res.Key !== null || res.Key !== undefined) {
           setForm({ ...form, pictureName: res.Key });
+          alert('사진이 업로드 되었습니다.')
         } else {
           alert("에러", res.Key);
         }
