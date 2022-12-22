@@ -8,4 +8,4 @@
 # 상세페이지 
 ![detail](./src/asset/ReadmeImg/detail.png)
 # 작성(수정) 페이지 
-![wirteeditpage](./src/asset/ReadmeImg/wirteeditpage.png)
+![write](./src/asset/ReadmeImg/write.png)
