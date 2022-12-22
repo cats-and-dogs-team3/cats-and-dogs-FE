@@ -5,7 +5,7 @@ import uppost from "../modules/uppostSlice";
 import bestSlice from "../modules/bestSlice";
 import post from "../modules/postSlice";
 import signUp from "../modules/signUpSlice";
-import login from "../modules/loginSlice";
+import signIn from "../modules/signInSlice";
 import nickname from "../modules/nickNameSlice";
 
 const store = configureStore({
@@ -15,7 +15,7 @@ const store = configureStore({
     uppost: uppost,
     post,
     signUp,
-    login,
+    signIn,
     nickname,
   },
 });
