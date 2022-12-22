@@ -8,6 +8,7 @@ const MyButton = (props) => {
 
   return (
     <StButton
+      fontSize={props.fontSize}
       shadow={props.shadow}
       border={props.border}
       background={props.background}
@@ -27,7 +28,9 @@ const MyButton = (props) => {
 
 export default MyButton;
 const StButton = styled.button`
-  font-size: 1.6rem;
+  flex-wrap: wrap;
+  /* font-size: 1.6rem; */
+  font-size: ${({ fontSize }) => fontSize || "1.6rem"};
   box-shadow: ${({ shadow }) => shadow || "non"};
   border: ${({ border }) => border || css`1px solid var(--color-point1)`};
   border-radius: 1rem;

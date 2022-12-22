@@ -4,6 +4,7 @@ import Stack from "../ui/Stack";
 import Comment from "./Comment";
 import CommentForm from "./CommentForm";
 import { useSelector } from "react-redux";
+import { $getToken } from "../../dataManager/myQueries";
 const Comments = ({ postId }) => {
   const { commentList, isLoading, error } = useSelector(
     (state) => state.post.commentChunk
@@ -24,7 +25,7 @@ const Comments = ({ postId }) => {
           <Comment key={comment.id} comment={comment} />
         ))}
       </StContainer>
-      <CommentForm postId={postId} />
+      {$getToken() ? <CommentForm postId={postId} /> : null}
     </Stack>
   );
 };
