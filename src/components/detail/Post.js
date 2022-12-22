@@ -13,6 +13,7 @@ import { likeEmpty, likeFilled, threeCats } from "../../asset";
 
 import { __getPost, __liking } from "../../redux/modules/postSlice";
 import { $deletePost } from "../../dataManager/myQueries";
+import { s3Url } from "../../dataManager/apiConfig";
 
 const Post = ({ postId }) => {
   const navigate = useNavigate();
@@ -44,7 +45,7 @@ const Post = ({ postId }) => {
     <Fragment>
       <MyStack>
         {/* src : post.picturePath */}
-        <Img style={{ margin: "3rem 0" }} src={threeCats} />
+        <Img style={{ margin: "3rem 0" }} src={s3Url+post.pictureName} />
         <Stack
           gap="2rem"
           wd="53rem"
