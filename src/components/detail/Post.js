@@ -27,7 +27,7 @@ const Post = ({ postId }) => {
   }, [dispatch, postId]);
   const onClickHandler = (e) => {
     const { name } = e.target;
-    if (name === "edit") navigate("/");
+    if (name === "edit") navigate(`/edit/${postId}`);
     if (name === "delete") {
       $deletePost(postId).then((res) => {
         console.log('status 200 : ',res.statusCode ===200)
