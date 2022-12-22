@@ -7,7 +7,7 @@ import styled from "styled-components";
 import { __deleteComment } from "../../redux/modules/postSlice";
 
 const Comment = ({ comment }) => {
-  const userNickname = useSelector((state) => state.post.userNickname);
+  const nickname = useSelector((state) => state.nickname.nickname);
   const postId = useSelector((state) => state.post.post.id);
   const dispatch = useDispatch();
   return (
@@ -24,7 +24,7 @@ const Comment = ({ comment }) => {
         <ReplyTextArea value={comment.content} readOnly />
       </Stack>
       <Stack direction={"row"} justify="flex-end">
-        {/* {userNickname === comment.nickname ? ( */}
+        {nickname === comment.nickname ? (
           <MyButton
             onClick={() =>
               dispatch(
@@ -36,7 +36,7 @@ const Comment = ({ comment }) => {
           >
             삭제
           </MyButton>
-        {/* ) : null} */}
+        ) : null}
       </Stack>
     </Card>
   );

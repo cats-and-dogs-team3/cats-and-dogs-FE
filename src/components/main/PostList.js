@@ -1,21 +1,26 @@
-import react from "react";
 import styled from "styled-components";
 import PostBox from "./PostBox";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { __getPosts } from "../../redux/modules/mainSlice";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 function PostList() {
+  const dispatch = useDispatch();
+  const { error, isLoading, post: postList } = useSelector((state) => state.main); // 리듀서 명의
+  const navigate = useNavigate();
+  useEffect(() => {
+    dispatch(__getPosts());
+  }, [dispatch]);
   return (
-    <StyledPostList>
-      <PostBox></PostBox>
-      <PostBox></PostBox>
-      <PostBox></PostBox>
-      <PostBox></PostBox>
-      <PostBox></PostBox>
-      <PostBox></PostBox>
-      <PostBox></PostBox>
-      <PostBox></PostBox>
-      <PostBox></PostBox>
-      <PostBox></PostBox>
-      <PostBox></PostBox>
-      <PostBox></PostBox>
+    <StyledPostList>  
+      {postList &&
+        postList.map((posts) => (
+          <PostBox
+            key={posts.id}
+            offer={posts}
+          />
+        ))}
     </StyledPostList>
   );
 }

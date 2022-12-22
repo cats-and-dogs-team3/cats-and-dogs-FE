@@ -3,13 +3,15 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import MyButton from "./ui/MyButton";
 import { $getToken, $logout, $removeToken } from "../dataManager/myQueries";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const navigate = useNavigate();
+  const nickname = useSelector(state=>state.nickname.nickname)
   const onClickHandler = (e) => {
     const { name } = e.target;
     console.log('name',name)
-    if (name === "로그아웃") {
+    if (name === "logout") {
       $removeToken();
       navigate("/");
     } else {
@@ -27,15 +29,15 @@ const Header = () => {
       </MainTitle>
       <span>
         {$getToken()
-          ? "항해99 집사님 환영합니다 😸"
+          ? `${nickname} 집사님 환영합니다 😸`
           : "멍멍 ! 로그인을 해주세요 주인님 ! 🐶"}
       </span>
       {$getToken() ? (
-        <MyButton onClick={onClickHandler} mg="0 0 0 2rem">
+        <MyButton name='logout' onClick={onClickHandler} mg="0 0 0 2rem">
           로그아웃
         </MyButton>
       ) : (
-        <MyButton onClick={onClickHandler} mg="0 0 0 2rem">
+        <MyButton name='login' onClick={onClickHandler} mg="0 0 0 2rem">
           로그인
         </MyButton>
       )}

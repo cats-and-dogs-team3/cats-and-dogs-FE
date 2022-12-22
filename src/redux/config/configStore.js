@@ -7,7 +7,6 @@ import post from "../modules/postSlice";
 import signUp from "../modules/signUpSlice";
 import login from "../modules/loginSlice";
 import nickname from "../modules/nickNameSlice";
-
 const store = configureStore({
   reducer: {
     best: bestSlice,
@@ -16,7 +15,7 @@ const store = configureStore({
     post,
     signUp,
     login,
-    nickname,
+    nickname
   },
 });
 

@@ -75,6 +75,18 @@ const postSlice = createSlice({
     __typeComment: (state, action) => {
       state.comment = action.payload;
     },
+    __editTitle: (state,action)=>{
+      state.post.title = action.payload
+    },
+    __editContent: (state,action)=>{
+      state.post.content = action.payload
+    },
+    __editCategory: (state,action)=>{
+      state.post.category = action.payload
+    },
+    __editPictureName: (state,action)=>{
+      state.post.pictureName = action.payload
+    }
   },
   extraReducers: {
     [__getPost.pending]: (state) => {
@@ -82,7 +94,6 @@ const postSlice = createSlice({
     },
     [__getPost.fulfilled]: (state, action) => {
       state.isLoading = false;
-      state.userNickname = action.payload.post.nickname;
       state.post = action.payload.post;
       state.commentChunk.commentList = action.payload.comments;
     },
@@ -95,11 +106,9 @@ const postSlice = createSlice({
     },
     [__liking.fulfilled]: (state, action) => {
       state.isLoading = false;
-      console.log("action.payload.postLiked", action.payload.postLiked);
+      console.log("action.payload.postLiked", action.payload);
       state.post.postLike = action.payload.postLiked;
-      state.post.likeCount = action.payload.postLiked
-        ? state.post.likeCount + 1
-        : state.post.likeCount - 1;
+      state.post.likeCount = action.payload.likeCount;
     },
     [__liking.rejected]: (state, action) => {
       state.isLoading = false;
@@ -140,5 +149,5 @@ const postSlice = createSlice({
     },
   },
 });
-export const { __typeComment } = postSlice.actions;
+export const { __typeComment,__editContent,__editCategory,__editTitle,__editPictureName } = postSlice.actions;
 export default postSlice.reducer;

@@ -2,110 +2,61 @@ import React, { useState } from "react";
 import Layout from "../components/Layout";
 import styled from "styled-components";
 import Mybutton from "../components/ui/MyButton";
-import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { __uppostPost } from "../redux/modules/uppostSlice";
-import uuid from "react-uuid";
-import AWS, { ServiceCatalogAppRegistry } from "aws-sdk";
 import { $uploadPost } from "../dataManager/myQueries";
+import { uploadImageToS3 } from "../dataManager/imageQueries";
 
 const UploadPostPage = () => {
-  const KEY = uuid();
-  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [post, setPost] = useState({
+  const [form, setForm] = useState({
     title: "",
     content: "",
     category: "",
     pictureName: "",
   });
-  const [imgBase64, setImgBase64] = useState(""); // base64 impolding
-  const [imgFile, setImgFile] = useState(null);
-  const [root, setRoot] = useState(""); // 파일 원본주소 지정 및 보여주기위해서 string 처리해서 불러오기..
-
+  const [imgBase64, setImgBase64] = useState("");
   const changeFileHandler = (event) => {
     let reader = new FileReader();
 
     reader.onloadend = () => {
-      console.log("approaching reader");
       const base64 = reader.result;
       if (base64) {
-        setImgBase64(base64.toString()); // 파일 base64 상태 업데이트
+        setImgBase64(base64.toString());
       }
     };
     if (event.target.files[0]) {
       reader.readAsDataURL(event.target.files[0]);
-      setImgFile(event.target.files[0]);
     }
   };
 
-  function uploadFileHandler() {
-    const ACCESS_KEY = process.env.REACT_APP_ACCESS_KEY;
-    const SECRET_ACCESS_KEY = process.env.REACT_APP_SECRET_ACCESS_KEY; //시크릿엑세스키 env화
-    const REGION = process.env.REACT_APP_REGION;
-    const S3_BUCKET = process.env.REACT_APP_S3_BUCKET;
-
-    window.Buffer = window.Buffer || require("buffer").Buffer;
-    const base64Data = new Buffer.from(
-      imgBase64.replace(/^data:image\/\w+;base64,/, ""),
-      "base64"
-    ); // base64 인코딩
-    const type = imgBase64.split(";")[0].split("/")[1]; //타입 설정
-
-    // console.log("encoding-base64", base64Data);
-    // console.log("type", type);
-
-    AWS.config.update({
-      //AWS 설정
-      accessKeyId: ACCESS_KEY,
-      secretAccessKey: SECRET_ACCESS_KEY,
-    });
-
-    setPost({
-      ...post,
-      pictureName: KEY + "." + type,
-    });
-
-    const upload = new AWS.S3.ManagedUpload({
-      params: {
-        Bucket: S3_BUCKET,
-        Key: `${KEY}.${type}`,
-        Body: base64Data,
-        // ContentEncoding: "base64",
-        // ContentType: `image/${type}`,
-      },
-    });
-
-    const promise = upload.promise();
-    promise
+  const uploadHandler = () => {
+    uploadImageToS3(imgBase64)
       .then((res) => {
-        setRoot(`${KEY}.${type}`);
-
-        console.log("p", post);
-        window.setTimeout(function () {
-          alert("업로드가되었습니다.");
-        }, 2000);
+        console.log("res", res);
+        if (res.Key !== null || res.Key !== undefined) {
+          setForm({ ...form, pictureName: res.Key });
+        } else {
+          alert("에러", res.Key);
+        }
       })
       .catch((err) => {
         alert("업로드 실패");
-        console.log("err");
-        console.log(err);
       });
-  }
+  };
 
   function writeHandler(state) {
-    if (post.title.trim() === "") {
+    if (form.title.trim() === "") {
       alert("닉네임이 비어져 있습니다!");
-    } else if (post.content.trim() === "") {
+    } else if (form.content.trim() === "") {
       alert("제목이 비어져 있습니다!");
-    } else if (post.category.trim() === "") {
+    } else if (form.category.trim() === "") {
       alert("카테고리 가 비어져있습니다.!");
-    } else if (post.pictureName.trim() === "") {
+    } else if (form.pictureName.trim() === "") {
       alert("사진업로드를 하지 않으셨습니다.!");
     } else {
-      console.log("state staet", state);
-      // dispatch(__uppostPost(state));
-      $uploadPost(state).then((data) => data.statusCode === 200 && navigate('/'));
+      $uploadPost(state).then(
+        (data) => data.statusCode === 200 && navigate("/")
+      );
     }
   }
 
@@ -120,8 +71,8 @@ const UploadPostPage = () => {
               type="text"
               onChange={(e) => {
                 const { value } = e.target;
-                setPost({
-                  ...post,
+                setForm({
+                  ...form,
                   title: value,
                 });
               }}
@@ -140,14 +91,14 @@ const UploadPostPage = () => {
                   id="imgFile"
                   onChange={changeFileHandler}
                 />
-                <button onClick={uploadFileHandler}>파일 업로드</button>
+                <button onClick={uploadHandler}>파일 업로드</button>
                 <label>카테고리</label>
                 <select
                   name="category"
                   onChange={(e) => {
                     const { value } = e.target;
-                    setPost({
-                      ...post,
+                    setForm({
+                      ...form,
                       category: value,
                     });
                   }}
@@ -166,10 +117,9 @@ const UploadPostPage = () => {
                   <textarea
                     onChange={(e) => {
                       const { value } = e.target;
-                      setPost({
-                        ...post,
+                      setForm({
+                        ...form,
                         content: value,
-                        pictureName: root,
                       });
                     }}
                   ></textarea>
@@ -177,9 +127,7 @@ const UploadPostPage = () => {
                 <div className="button_zone">
                   <Mybutton
                     onClick={() => {
-                      console.log(post);
-                      console.log("r1", root);
-                      writeHandler(post);
+                      writeHandler(form);
                     }}
                   >
                     작성완료
