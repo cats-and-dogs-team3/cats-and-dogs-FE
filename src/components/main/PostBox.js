@@ -25,10 +25,12 @@ function PostBox(prop) {
       <img alt="" src={src}></img>
       <div className="title_box">
         <div className="title">{prop.offer.title}</div>
-        <Like
-          likeCount={prop.offer.likeCount}
-          postLike={prop.offer.postLike}
-        ></Like>
+        <div classNAme="like_box">
+          <Like
+            likeCount={prop.offer.likeCount}
+            postLike={prop.offer.postLike}
+          ></Like>
+        </div>
       </div>
       <div className="content_box">{prop.offer.content}</div>
       <div className="info_box">
@@ -58,9 +60,17 @@ const StyledPostBox = styled.div`
 
   .title_box {
     display: flex;
-    gap: 150px;
+    width: 80%;
+    height: fit-content;
     font-size: 2.4rem;
     font-weight: bold;
+  }
+  .title {
+    width: 85%;
+  }
+  .like_box {
+    width: fit-content;
+    height: fit-conten;
   }
   .content_box {
     width: 90%;
