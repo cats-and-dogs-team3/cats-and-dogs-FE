@@ -19,7 +19,7 @@ const Comments = ({ postId }) => {
       direction={"column"}
     >
       {/* comments container*/}
-      <StContainer gap="1rem" justify="flex-start" direction={"column"}>
+      <StContainer scrollable={commentList.length>0} gap="1rem" justify="flex-start" direction={"column"}>
         {commentList.map((comment) => (
           <Comment key={comment.id} comment={comment} />
         ))}
@@ -37,6 +37,6 @@ const StContainer = styled.div`
   gap: 1rem;
   max-height: 45rem;
   padding: 2rem;
-  overflow-y: scroll;
+  overflow-y: ${({scrollable})=> scrollable ? 'scroll' : 'none' };
   flex: 1;
 `;
