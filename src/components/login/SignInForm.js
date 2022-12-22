@@ -1,39 +1,37 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import {
-  chatLogo,
-  check,
-  lockLogo,
-  logo,
-  postLogo,
-  xMark,
-} from "../../asset/signUp/index";
 import { useNavigate } from "react-router-dom";
 import { Wrap, Button, Card, Stack, Img } from "../ui/index";
 import { useDispatch, useSelector } from "react-redux";
+import { closedEye, openEye } from "../../asset/signUp/index";
+import { connectKakao } from "./func";
+import SignUpFooter from "../signUp/SignUpFooter";
+import { $login } from "../../dataManager/myQueries";
+import {
+  chatLogo,
+  lockLogo,
+  logo,
+  postLogo,
+} from "../../asset/signUp/index";
 import {
   __typePassword,
   __typeUsername,
   __showPwd,
   __cleanUp,
-} from "../../redux/modules/loginSlice";
-import { closedEye, openEye } from "../../asset/signUp/index";
-import { connectKakao } from "./func/functionsForLogin";
-import SignUpFooter from "../signUp/SignUpFooter";
-import { $login } from "../../dataManager/myQueries";
+} from "../../redux/modules/signInSlice";
 
 //하단 메세지
-const messages = {
-  idInvalid: `입력한 사용자 이름을 사용하는 계정을 찾을 수 없습니다. 
-  사용자 이름을 확인하고 다시 시도하세요.`,
-  pwdInvalid: "잘못된 비밀번호입니다. 다시 확인하세요.",
-};
+// const messages = {
+//   idInvalid: `입력한 사용자 이름을 사용하는 계정을 찾을 수 없습니다. 
+//   사용자 이름을 확인하고 다시 시도하세요.`,
+//   pwdInvalid: "잘못된 비밀번호입니다. 다시 확인하세요.",
+// };
 const SignInForm = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const usernameState = useSelector((state) => state.login.username);
-  const passwordState = useSelector((state) => state.login.password);
+  const usernameState = useSelector((state) => state.signIn.username);
+  const passwordState = useSelector((state) => state.signIn.password);
 
   const [formIsValid, setFormIsValid] = useState(false);
 

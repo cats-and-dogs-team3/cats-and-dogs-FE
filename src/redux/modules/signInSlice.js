@@ -2,15 +2,15 @@ import { createSlice } from "@reduxjs/toolkit";
 import {
   isValidId,
   isValidPassword,
-} from "../../components/signUp/func/functionsForSignUp";
+} from "../../components/signUp/func";
 
 const initialState = {
   username: { value: "", isValid: false },
   password: { value: "", isValid: false },
 };
 
-const loginSlice = createSlice({
-  name: "login",
+const signInSlice = createSlice({
+  name: "signIn",
   initialState,
   reducers: {
     __typeUsername: (state, action) => {
@@ -31,6 +31,6 @@ const loginSlice = createSlice({
   },
 });
 export const { __typeUsername, __typePassword, __showPwd, __cleanUp } =
-  loginSlice.actions;
+  signInSlice.actions;
 
-export default loginSlice.reducer;
+export default signInSlice.reducer;

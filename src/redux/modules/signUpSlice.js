@@ -4,7 +4,7 @@ import {
   isValidEmail,
   isValidId,
   isValidPassword,
-} from "../../components/signUp/func/functionsForSignUp";
+} from "../../components/signUp/func";
 
 //초기 상태값 설정
 const initialState = {
